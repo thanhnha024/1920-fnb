@@ -2,7 +2,7 @@
 add_action('wp_enqueue_scripts', 'shin_scripts');
 function shin_scripts()
 {
-    $version = '2.2.0';
+    $version = time();
 
     // Load CSS
     wp_enqueue_style('main-style-css', THEME_URL . '-child' . '/assets/main/main.css', array(), $version, 'all');
@@ -51,12 +51,12 @@ function show_product_details($atts) {
     <div class="popup-order">
 	    <div class="left-popup-order">
 	      <div class="product-image">
-	            <img src="<?php echo $image_url; ?>" alt="<?php echo $title; ?>" />
+	            <img class="img-features-custom" src="<?php echo $image_url; ?>" alt="<?php echo $title; ?>" />
 	        </div>
 	        <div class="product-gallery">
 	            <?php foreach ($gallery_image_ids as $gallery_image_id) : 
 	                $gallery_image_url = wp_get_attachment_image_url($gallery_image_id, 'thumbnail'); ?>
-	                <img src="<?php echo $gallery_image_url; ?>" alt="<?php echo $title; ?>" />
+	                <img class="img-gallery-custom" src="<?php echo $gallery_image_url; ?>" alt="<?php echo $title; ?>" />
 	            <?php endforeach; ?>
 	        </div>
 	    </div>
@@ -99,3 +99,4 @@ function show_product_details($atts) {
 
 
 add_shortcode('product_details', 'show_product_details');
+
