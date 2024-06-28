@@ -1,1 +1,6 @@
-const shin = 0;
+"use strict";
+$ = jQuery;
+
+$(document).ready(function () {
+  shin_test();
+});
