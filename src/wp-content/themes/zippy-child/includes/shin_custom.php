@@ -100,3 +100,18 @@ function show_product_details($atts) {
 
 add_shortcode('product_details', 'show_product_details');
 
+//hook lightbox flatsome
+function lightbox_popup_custom(){
+	echo do_shortcode('[lightbox id="order-popup-nav" width="500px" padding="15px 30px" ][block id="pickup-or-delivery"][/lightbox]');
+	echo do_shortcode('[lightbox id="confirmorder" width="500px"  padding="0"][pickup_information][/lightbox]');
+}
+add_action( 'wp_footer', 'lightbox_popup_custom' );
+
+//Remove button checkout and view cart in sidebar car
+remove_action( 'woocommerce_widget_shopping_cart_buttons', 'woocommerce_widget_shopping_cart_button_view_cart', 10 );
+remove_action( 'woocommerce_widget_shopping_cart_buttons', 'woocommerce_widget_shopping_cart_proceed_to_checkout', 20 );
+//Display button select dinning preference
+function display_button_select_method(){
+    echo '<a class="select-dinning-preferences" href="#order-popup-nav">Select your dinning preference</a>';
+}
+add_action( 'woocommerce_widget_shopping_cart_buttons', 'display_button_select_method', 20 );
