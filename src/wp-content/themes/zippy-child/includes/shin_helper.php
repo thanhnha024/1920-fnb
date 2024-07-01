@@ -60,3 +60,13 @@ function get_the_next_day($number)
   );
   return $date_time;
 }
+
+function select_store($check_store_id){
+  global $wpdb;
+    $store = $wpdb->get_row(
+        $wpdb->prepare(
+            "SELECT name_store, location_store FROM fcs_data_store_available WHERE id = %d",
+            $check_store_id
+        )
+    );
+}
