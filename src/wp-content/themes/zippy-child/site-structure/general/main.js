@@ -1,3 +1,13 @@
+"use strict";
+$ = jQuery;
+
+$(document).ready(function () {
+  initCalendar();
+  toggleMoreDate();
+  chooseDate();
+  trigerMainButton();
+  validationEvent();
+});
 //display_popup_pickup
 document.getElementById('pickupButton').addEventListener('click', function() {
     jQuery.ajax({

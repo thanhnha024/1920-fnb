@@ -1,11 +1,12 @@
 @import "mixins";
 
-@import "fonts";
+// @import "fonts";
 @import "variables";
 
 @import "animation";
 @import "buttons";
 @import "_additional";
+@import "_pickup_popup.scss";
 
 #nav-order a {
   text-transform: capitalize;
