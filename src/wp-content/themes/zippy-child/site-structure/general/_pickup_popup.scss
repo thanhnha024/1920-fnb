@@ -1,0 +1,125 @@
+.infor-pickup {
+  max-width: 500px;
+  margin: 30px auto;
+
+  .infor-pickup-content {
+    .wrapper {
+      display: flex;
+      justify-content: space-between;
+    }
+    .wrapper-icon {
+      width: 200px;
+      gap: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      .more-date {
+        text-transform: capitalize;
+        font-size: 16px;
+        color: rgb(255, 178, 91);
+      }
+    }
+    .wrapper {
+      .wrapper-calendar,
+      #calendar {
+        width: 100%;
+      }
+      .wrapper-calendar {
+        margin-bottom: 20px;
+        flex-shrink: 0;
+        align-self: stretch;
+        display: flex;
+        -webkit-box-pack: center;
+        justify-content: center;
+        border: 1px solid rgb(214, 214, 214);
+        background-color: rgb(255, 255, 255);
+      }
+      .wrapper-date-box {
+        width: 100%;
+        display: flex;
+        gap: 10px;
+        justify-content: space-between;
+        .date-box {
+          margin-right: 0;
+          margin-bottom: 0;
+          min-width: 70px;
+          padding: 10px 10px;
+          box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px;
+          border-radius: 2px;
+          -webkit-box-flex: 1;
+          flex-grow: 1;
+          display: flex;
+          flex-direction: column;
+          -webkit-box-align: center;
+          align-items: center;
+          border: 2px solid rgb(214, 214, 214);
+          background-color: rgb(255, 255, 255);
+          z-index: 10;
+          &:hover,
+          &.selected {
+            border: 2px solid rgb(57, 57, 57);
+          }
+          .date,
+          .month {
+            font-weight: 600;
+          }
+          .date {
+            font-size: 25px;
+          }
+          cursor: pointer;
+          .wrapper-date {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+          }
+        }
+      }
+      &.pickup-time {
+        flex-direction: column;
+
+        .time-select-control {
+          padding: 20px;
+          display: flex;
+          -webkit-box-align: center;
+          align-items: center;
+          position: relative;
+          width: 100%;
+          height: 55px;
+          background-color: rgb(255, 255, 255);
+          color: rgb(81, 81, 81);
+          border-radius: 2px;
+          border: 1px solid rgb(214, 214, 214);
+          &:focus {
+            border: 1px solid rgb(81, 81, 81);
+            outline: none;
+          }
+          &.validation{
+          border: 1px solid red !important;
+
+          }
+          .time-select {
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            z-index: 1;
+            appearance: none;
+            cursor: pointer;
+          }
+          .arrow-icon {
+            display: flex;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 20px;
+          }
+        }
+      }
+      p.validation{
+        color: red;
+        margin-top: 10px;
+        }
+    }
+  }
+}
