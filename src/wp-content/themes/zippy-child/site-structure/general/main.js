@@ -1,3 +1,13 @@
+"use strict";
+$ = jQuery;
+
+$(document).ready(function () {
+  initCalendar();
+  toggleMoreDate();
+  chooseDate();
+  trigerMainButton();
+  validationEvent();
+});
 //display_popup_pickup
 document.getElementById('pickupButton').addEventListener('click', function() {
     jQuery.ajax({
@@ -31,11 +41,12 @@ jQuery(document).ready(function($) {
                     store_id: storeId,
                 },
                 success: function(response) {
-                    console.log('Store info saved to session.');
-                    window.location.href = '/shop/';
+                    console.log(response);
+                    var calendarPickupLink = document.getElementById('calendar-pickup');
+                    calendarPickupLink.click();
                 },
                 error: function(error) {
-                    console.error('Error saving store info to session.');
+                    console.log('Failed to save store.');
                 }
             });
         } else {
@@ -43,7 +54,7 @@ jQuery(document).ready(function($) {
         }
     });
 
-    // //Quantity mini cart
+     //Quantity mini cart
      $('body').on('change', '.quantity.buttons_added .qty', function() {
         var $input = $(this);
         var cart_item_key = $input.attr('data-cart-item-key');

@@ -6,6 +6,7 @@
 @import "animation";
 @import "buttons";
 @import "_additional";
+@import "_pickup_popup.scss";
 
 #nav-order a {
   text-transform: capitalize;
@@ -408,4 +409,10 @@ a.remove {
 }
 .mt-30px {
   margin-top: 30px !important;
+}
+.align-items-center{
+	align-items: center !important;
+}
+.d-none{
+  display: none !important;
 }

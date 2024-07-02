@@ -27,21 +27,78 @@ function pr($data)
     width: 100%;
     height: 100%;
   }</style>';
-    echo '<div id="debug_wrapper"><pre>';
+  echo '<div id="debug_wrapper"><pre>';
 
-    print_r($data); // or var_dump($data);
-    echo "</pre></div>";
-    die;
-
+  print_r($data); // or var_dump($data);
+  echo "</pre></div>";
+  die;
 }
 
-function select_store($check_store_id){
+function get_the_next_day($number, $currentDatePrams = '')
+{
+
+  // set the default timezone to use.
+  date_default_timezone_set('Asia/Singapore');
+  // Get the current date
+  $currentDate = $currentDatePrams ? $currentDatePrams : date('Y-m-d');
+  $timetemp =  '+' . $number . 'day';
+
+  // Calculate the next day using strtotime() function
+  $nextDayTimestamp = strtotime($timetemp, strtotime($currentDate));
+
+  $date_time = array();
+  // Format the next day's date, month, and day
+  $nextDayDate = date('d', $nextDayTimestamp);
+  $nextDayMonth = date('F', $nextDayTimestamp);
+  $nextDayDay = date('D', $nextDayTimestamp);
+  $fomatedDate = date('Y-m-d', $nextDayTimestamp);
+
+  $date_time = array(
+    'date' => $nextDayDate,
+    'day' => $nextDayDay,
+    'month' => $nextDayMonth,
+    'fomated_date' => $fomatedDate
+
+  );
+  return $date_time;
+}
+
+
+function select_store($check_store_id)
+{
   global $wpdb;
-    $store = $wpdb->get_row(
-        $wpdb->prepare(
-            "SELECT name_store, location_store FROM fcs_data_store_available WHERE id = %d",
-            $check_store_id
-        )
-    );
-    return $store;
+  $store = $wpdb->get_row(
+    $wpdb->prepare(
+      "SELECT name_store, location_store FROM fcs_data_store_available WHERE id = %d",
+      $check_store_id
+    )
+  );
+  return $store;
+}
+
+
+function get_the_timetemp($timebonus)
+{
+
+  $currentDateTime =  date('Y-m-d h A');
+  var_dump($currentDateTime);
+
+  for ($i = 0; $i < 2; $i++) {
+    $timetemp =   $timebonus == 0 && $i == 0 ? 'now' : '+' . $timebonus + $i . ' hour' ; //+1 hour 
+    $nextTimestamp = strtotime($timetemp, strtotime($currentDateTime));
+    $fomatedTimestamp[$i] = date('H:i A', $nextTimestamp);
+  }
+
+
+  return $fomatedTimestamp;
+}
+
+function get_diff_time($time_end, $start_time = ''): int
+{
+  $startTime = new DateTime('h A');
+
+  $endTime = new DateTime($time_end);
+  $interval = $startTime->diff($endTime);
+  $diff_time = $interval->format('%h');
+  return  $diff_time;
 }

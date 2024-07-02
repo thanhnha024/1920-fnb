@@ -1,16 +1,5 @@
 <?php
 
-// Ensure session is started
-add_action('init', 'start_session', 1);
-function start_session()
-{
-    if (!isset(WC()->session)) {
-        if (!is_admin() && !WC()->session->has_session()) {
-            WC()->session->set_customer_session_cookie(true);
-        }
-    }
-}
-
 add_action('wp_ajax_display_popup_pickup', 'display_popup_pickup');
 add_action('wp_ajax_nopriv_display_popup_pickup', 'display_popup_pickup');
 
@@ -35,7 +24,10 @@ function save_store_to_session()
 
         WC()->session->set('selected_store_id', $store_id);
 
-        wp_die();
+        $selected_store_id = WC()->session->get('selected_store_id');
+      
+
+        wp_send_json_success($selected_store_id);
     }
 
     wp_die('Error: Store ID not provided.');
@@ -88,16 +80,15 @@ function enqueue_woocommerce_scripts() {
     if ( class_exists( 'WooCommerce' ) ) {
         wp_enqueue_script( 'wc-cart-fragments' );
         wp_enqueue_script( 'woocommerce' );
-        wp_enqueue_script( 'wc-add-to-cart' ); // Ensure add-to-cart script is loaded
+        wp_enqueue_script( 'wc-add-to-cart' ); 
     }
 }
 add_action( 'wp_enqueue_scripts', 'enqueue_woocommerce_scripts' );
 
 function my_enqueue_scripts() {
-    // Enqueue the custom mini-cart script
+
     wp_enqueue_script( 'mini-cart-js', get_template_directory_uri() . '/js/mini-cart.js', array( 'jquery' ), '1.0', true );
 
-    // Pass AJAX URL and nonce to the script
     wp_localize_script( 'mini-cart-js', 'mini_cart_params', array(
         'ajax_url' => admin_url( 'admin-ajax.php' ),
         'update_cart_nonce' => wp_create_nonce( 'woocommerce-cart' ),
