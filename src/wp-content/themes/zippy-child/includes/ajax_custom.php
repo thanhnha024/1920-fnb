@@ -82,3 +82,46 @@ function order_nav_button()
     echo '<button id="nav-order"><a href="' . $nav_link . '">Order</a></button>';
 }
 add_shortcode('order_menu', 'order_nav_button');
+
+
+function enqueue_woocommerce_scripts() {
+    if ( class_exists( 'WooCommerce' ) ) {
+        wp_enqueue_script( 'wc-cart-fragments' );
+        wp_enqueue_script( 'woocommerce' );
+        wp_enqueue_script( 'wc-add-to-cart' ); // Ensure add-to-cart script is loaded
+    }
+}
+add_action( 'wp_enqueue_scripts', 'enqueue_woocommerce_scripts' );
+
+function my_enqueue_scripts() {
+    // Enqueue the custom mini-cart script
+    wp_enqueue_script( 'mini-cart-js', get_template_directory_uri() . '/js/mini-cart.js', array( 'jquery' ), '1.0', true );
+
+    // Pass AJAX URL and nonce to the script
+    wp_localize_script( 'mini-cart-js', 'mini_cart_params', array(
+        'ajax_url' => admin_url( 'admin-ajax.php' ),
+        'update_cart_nonce' => wp_create_nonce( 'woocommerce-cart' ),
+    ) );
+}
+add_action( 'wp_enqueue_scripts', 'my_enqueue_scripts' );
+
+
+function woocommerce_update_cart_item_quantity() {
+    if ( ! isset( $_POST['cart_item_key'], $_POST['quantity'] ) ) {
+        return;
+    }
+
+    $cart_item_key = sanitize_text_field( $_POST['cart_item_key'] );
+    $quantity = intval( $_POST['quantity'] );
+
+    WC()->cart->set_quantity( $cart_item_key, $quantity, true );
+    WC()->cart->calculate_totals();
+    $cart_count = WC()->cart->get_cart_contents_count();
+
+    wp_send_json_success(array(
+        'cart_count' => $cart_count
+    ));
+
+}
+add_action( 'wp_ajax_woocommerce_update_cart_item_quantity', 'woocommerce_update_cart_item_quantity' );
+add_action( 'wp_ajax_nopriv_woocommerce_update_cart_item_quantity', 'woocommerce_update_cart_item_quantity' );
