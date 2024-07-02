@@ -161,7 +161,7 @@ function pickup_information_shortcode() {
             </div>
             <div class="col-infor-store">
             <?php foreach ( $results as $store ) { ?>
-            <div class="items-infor-pickup-content">
+            <div class="items-infor-pickup-content" data-store-id = "<?php echo esc_attr( $store->id ) ?>">
                 <div class="row-items-infor">
                     <svg width="18px" height="18px" viewBox="0 0 24 24" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M0 0h24v24H0z" fill="none"></path><path fill="#5f3327" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"></path></svg>
                     <p class="namestore"><?php echo esc_html( $store->name_store ) ?></p>
@@ -181,7 +181,7 @@ function pickup_information_shortcode() {
             </div>
         </div>
 		<div class="action-pickup">
-            <button><a href="/checkout">Continue with Selection</a></button>
+            <button class="button-selected-store">Continue with Selection</button>
         </div>
     </div>
     <?php
