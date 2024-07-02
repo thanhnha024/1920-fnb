@@ -113,6 +113,10 @@ remove_action( 'woocommerce_widget_shopping_cart_buttons', 'woocommerce_widget_s
 remove_action( 'woocommerce_widget_shopping_cart_buttons', 'woocommerce_widget_shopping_cart_proceed_to_checkout', 20 );
 //Display button select dinning preference
 function display_button_select_method(){
-    echo '<a class="select-dinning-preferences" href="#order-popup-nav">Select your dinning preference</a>';
+    if ( ! WC()->session->get('pickupstatus') && ! WC()->session->get('selected_store_id') ) {
+        echo '<a class="select-dinning-preferences" href="#order-popup-nav">Select your dinning preference</a>';
+    } else {
+		echo '<a class="select-dinning-preferences" href="/cart/">Select your dinning preference</a>';
+    }
 }
 add_action( 'woocommerce_widget_shopping_cart_buttons', 'display_button_select_method', 20 );

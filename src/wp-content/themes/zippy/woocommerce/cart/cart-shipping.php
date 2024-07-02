@@ -24,8 +24,12 @@ $formatted_destination    = isset( $formatted_destination ) ? $formatted_destina
 $has_calculated_shipping  = ! empty( $has_calculated_shipping );
 $show_shipping_calculator = ! empty( $show_shipping_calculator );
 $calculator_text          = '';
+
+$store_id=WC()->session->get('selected_store_id');
+$store = select_store($store_id);
 ?>
-<tr class="woocommerce-shipping-totals shipping <?php if ( get_theme_mod( 'cart_boxed_shipping_labels', 0 ) && 1 < count( $available_methods ) ) echo 'shipping--boxed'; ?>">
+
+<!-- <tr class="woocommerce-shipping-totals shipping <?php if ( get_theme_mod( 'cart_boxed_shipping_labels', 0 ) && 1 < count( $available_methods ) ) echo 'shipping--boxed'; ?>">
 	<td class="shipping__inner" colspan="2">
 		<table class="shipping__table <?php if ( 1 < count( $available_methods ) ) : ?>shipping__table--multiple<?php endif; ?>">
 			<tbody>
@@ -98,9 +102,27 @@ $calculator_text          = '';
 						<?php if ( $show_shipping_calculator ) : ?>
 							<?php woocommerce_shipping_calculator( $calculator_text ); ?>
 						<?php endif; ?>
+							
 					</td>
 				</tr>
 			</tbody>
 		</table>
 	</td>
-</tr>
+</tr> -->
+<?php if ( $store ) : ?>
+    <tr class="woocommerce-pickup-location">
+        <td colspan="2">
+            <h4 class="text-start fs-13px ">Store Pick Up</h4>
+            <table class="table-store-pickup">
+                <tr class="border-bottom-0">
+                    <th>Store:</th>
+                    <td><?php echo esc_html( $store->name_store ); ?></td>
+                </tr>
+                <tr class="border-bottom-0">
+                    <th >Address:</th>
+                    <td><?php echo esc_html( $store->location_store ); ?></td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+<?php endif; ?>
