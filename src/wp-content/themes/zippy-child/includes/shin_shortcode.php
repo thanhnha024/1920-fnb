@@ -6,7 +6,7 @@ function pickup_date_calander_callback()
   <div class="infor-pickup-content">
 
     <div class="wrapper">
-      <h3>Select a Pickup Date</h3>
+      <h3 class="fs-14px fw-600 text-secondary">Select a Pickup Date</h3>
 
       <button id="calendar-control-button" lass="wrapper-icon">
         <div class="wrapper-icon">
@@ -17,7 +17,7 @@ function pickup_date_calander_callback()
 
           </svg>
 
-          <span class="more-date">More Dates</span>
+          <span class="more-date fs-14px ">More Dates</span>
         </div>
       </button>
 

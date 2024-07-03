@@ -280,6 +280,15 @@ a.remove {
     font-size: 16px;
   }
 }
+#pickup-info-container{
+  .edit-store-info{
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 8px;
+  }
+}
+.edit-store-btn {
+  margin-bottom: 0;
+  margin-right: 0;
+}
 //custom class css
 .text-secondary {
   color: #5f3327 !important;
