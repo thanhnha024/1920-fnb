@@ -81,28 +81,29 @@ if (is_woocommerce_activated() && flatsome_is_wc_cart_available()) {
 
       <!-- Cart Sidebar Popup -->
       <div id="cart-popup" class="mfp-hide widget_shopping_cart">
-        <div class="cart-popup-inner inner-padding">
+        <div class="cart-popup-inner ">
           <div class="cart-popup-title text-center">
-            <h4 class="uppercase"><?php _e('Cart', 'woocommerce'); ?></h4>
-            <div class="is-divider"></div>
+            <h4 class="fs-16px fw-600 text-secondary mb-0"><?php _e('Your Cart', 'woocommerce'); ?></h4>
+            <span id="cart-items-count" class="fs-14px text-secondary"> <?php echo sprintf(__('You have added %d items', 'woocommerce'), WC()->cart->get_cart_contents_count()); ?></span>
           </div>
-          <div class="widget_shopping_cart_content">
-            <div class="edit-store-info">
+          <div class="edit-store-info">
                 <?php
                   $store_id = WC()->session->get('selected_store_id');
-                  $store = select_store($store_id);
+                  $store = select_store($store_id); 
                 ?>
                 <?php if ($store) { ?>
                   <h4 class="fs-14px fw-600 text-secondary">Pickup Store</h4>
-                  <div class="d-flex align-items-center">
+                  <div class="d-flex align-items-center justify-content-between">
                     <div class="store-info fs-14px">
                       <span><?php echo esc_html($store->name_store); ?></span>
                       <span><?php echo esc_html($store->location_store); ?></span>
                     </div>
-                    <a href="#confirmorder"><img width="20" height="20" src="/wp-content/uploads/2024/07/pen.png"></a>
+                    <a href="#confirmorder"><img width="20" height="20" src="/wp-content/uploads/2024/07/pen-1.png"></a>
                 </div>
                 <?php } ?>
             </div>
+          <div class="widget_shopping_cart_content">
+            
             <hr/>
             <?php woocommerce_mini_cart(); ?>
           </div>

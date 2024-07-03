@@ -41,16 +41,45 @@ jQuery(document).ready(function($) {
                     store_id: storeId,
                 },
                 success: function(response) {
-                    console.log('Store info saved to session.');
-                    window.location.href = '/shop/';
+                    console.log(response);
+                    var calendarPickupLink = document.getElementById('calendar-pickup');
+                    calendarPickupLink.click();
                 },
                 error: function(error) {
-                    console.error('Error saving store info to session.');
+                    console.log('Failed to save store.');
                 }
             });
         } else {
             console.error('No active store selected.');
         }
+    });
+
+     //Quantity mini cart
+     $('body').on('change', '.quantity.buttons_added .qty', function() {
+        var $input = $(this);
+        var cart_item_key = $input.attr('data-cart-item-key');
+        $.ajax({
+            type: 'POST',
+            url: mini_cart_params.ajax_url,
+            data: {
+                action: 'woocommerce_update_cart_item_quantity',
+                cart_item_key: cart_item_key,
+                quantity: $(this).val(),
+                _wpnonce: mini_cart_params.update_cart_nonce
+            },
+            success: function(response) {
+               $('#cart-items-count').text('You have added ' + response.data['cart_count'] + ' items');
+                // Reload the mini cart
+                $(document.body).trigger('wc_fragment_refresh');
+                
+            },
+            error: function(response) {
+                console.log('Error:', response);
+               
+            }
+        });
+    
+        
     });
 });
 

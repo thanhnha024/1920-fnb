@@ -105,6 +105,7 @@ add_shortcode('product_details', 'show_product_details');
 function lightbox_popup_custom(){
 	echo do_shortcode('[lightbox id="order-popup-nav" width="500px" padding="15px 30px" ][block id="pickup-or-delivery"][/lightbox]');
 	echo do_shortcode('[lightbox id="confirmorder" width="500px"  padding="0"][pickup_information][/lightbox]');
+	echo do_shortcode('[lightbox id="calendar-pickup" width="500px"  padding="0"][calendar_pickup][/lightbox]');
 }
 add_action( 'wp_footer', 'lightbox_popup_custom' );
 

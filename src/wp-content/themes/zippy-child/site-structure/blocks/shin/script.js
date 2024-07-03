@@ -109,6 +109,7 @@ function ajaxAddDate(date, time) {
     },
     success: function (response) {
       console.log(response);
+       window.location.href = '/shop/';
     },
     error: function (error) {
       console.log("Failed to process items.");

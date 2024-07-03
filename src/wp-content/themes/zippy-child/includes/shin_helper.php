@@ -73,6 +73,7 @@ function select_store($check_store_id)
       $check_store_id
     )
   );
+  return $store;
 }
 
 
