@@ -48,8 +48,8 @@ function get_the_next_day($number, $currentDatePrams = '')
   $datetime = new DateTime('tomorrow');
   $tomorow = strtotime($datetime->format('Y-m-d'));
   $fomatedDate = date('D, j M Y', $nextDayTimestamp);
-  if($nextDayTimestamp == $tomorow){
-    $fomatedDate = 'Tomorow,' .date(' j M Y', $nextDayTimestamp);
+  if ($nextDayTimestamp == $tomorow) {
+    $fomatedDate = 'Tomorow,' . date(' j M Y', $nextDayTimestamp);
   }
   $date_time = array();
   // Format the next day's date, month, and day
@@ -83,30 +83,23 @@ function select_store($check_store_id)
 }
 
 
-function get_the_timetemp($timebonus)
+function get_the_timetemp($timebonus, $start_time)
 {
- 
-  $currentDateTime =  date('Y-m-d h A');
+
+  $currentDateTime =  date($start_time);
 
   for ($i = 0; $i < 2; $i++) {
-    $timetemp =   $timebonus == 0 && $i == 0 ? 'now' : '+' . $timebonus + $i . ' hour' ; //+1 hour 
+    $timetemp =   $timebonus == 0 && $i == 0 ? 'now' : '+' . $timebonus + $i . ' hour'; //+1 hour 
     $nextTimestamp = strtotime($timetemp, strtotime($currentDateTime));
     $fomatedTimestamp[$i] = date('H:i A', $nextTimestamp);
   }
-
-
   return $fomatedTimestamp;
 }
 
 function get_diff_time($time_end, $start_time = ''): int
 {
-  $startTime = new DateTime('h A');
-  // var_dump($startTime);
-  if($start_time){
-    $startTime = new DateTime( $start_time);
-  }
-  
 
+  $startTime = new DateTime($start_time);
   $endTime = new DateTime($time_end);
   $interval = $startTime->diff($endTime);
   $diff_time = $interval->format('%h');
