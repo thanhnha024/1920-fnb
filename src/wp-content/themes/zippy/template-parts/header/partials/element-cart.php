@@ -102,14 +102,12 @@ if (is_woocommerce_activated() && flatsome_is_wc_cart_available()) {
               </div>
             <?php } ?>
           </div>
-          <div class="edit-date-time">
-            <?php
-             $time = WC()->session->get('_pickup_time');
-             $date = WC()->session->get('_pickup_date');
-            //  $formattedDate = $date->format('D, j M Y');
-            //  var_dump($formattedDate);
-            ?>
-            <?php if ($time && $date) { ?>
+          <?php
+          $time = WC()->session->get('_pickup_time');
+          $date = WC()->session->get('_pickup_date');
+          ?>
+          <?php if ($time && $date) { ?>
+            <div class="edit-date-time">
               <h4 class="fs-14px fw-600 text-secondary">Pickup Time</h4>
               <div class="d-flex align-items-center justify-content-between">
                 <div class="date-info fs-14px">
@@ -118,8 +116,8 @@ if (is_woocommerce_activated() && flatsome_is_wc_cart_available()) {
                 </div>
                 <a href="#calendar-pickup"><img width="20" height="20" src="/wp-content/uploads/2024/07/pen-1.png"></a>
               </div>
-            <?php } ?>
-          </div>
+            </div>
+          <?php } ?>
           <div class="widget_shopping_cart_content">
             <?php woocommerce_mini_cart(); ?>
           </div>

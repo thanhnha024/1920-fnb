@@ -79,8 +79,8 @@ function renderBoxDate(time) {
   });
 }
 function chooseDate() {
-  $(".date-box").each(function (index, element) {
-    $(this).click(function (e) {
+  // $(".date-box").each(function (index, element) {
+    $('body').on('click ',".date-box", function (e) {
       e.preventDefault();
       $(".date-box").removeClass("selected");
       //active class
@@ -91,7 +91,7 @@ function chooseDate() {
       var partsDate = splitDate(selected_date);
       initCalendar(partsDate);
     });
-  });
+  // });
 }
 
 function validationEvent() {

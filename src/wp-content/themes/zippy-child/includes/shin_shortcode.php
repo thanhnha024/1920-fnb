@@ -56,7 +56,7 @@ function pickup_time_calander_callback()
 
     <div class="wrapper pickup-time">
       <h3>Select a Pickup Time</h3>
-      <div class="time-select-control">
+      <div id="time-select-control" class="time-select-control">
         <!-- <select id="time-select-option" class="time-select">
           <option value="0">Please select a timeslot</option>
           <?php
@@ -73,7 +73,7 @@ function pickup_time_calander_callback()
           <?php endwhile; ?>
 
         </select> -->
-        <select id="time-select-option" class="time-select">
+        <!-- <select id="time-select-option" class="time-select">
           <option value="">Please select a timeslot</option>
           <option value="11:30 AM to 12:30 PM">11:30 AM to 12:30 PM</option>
           <option value="12:30 PM to 01:30 PM">12:30 PM to 01:30 PM</option>
@@ -82,7 +82,7 @@ function pickup_time_calander_callback()
           <option value="03:30 PM to 04:30 PM">03:30 PM to 04:30 PM</option>
           <option value="04:30 PM to 05:30 PM">04:30 PM to 05:30 PM</option>
           <option value="05:30 PM to 06:30 PM">05:30 PM to 06:30 PM</option>
-        </select>
+        </select> -->
         <div class="arrow-icon">
           <svg direction="down" width="18px" height="18px" class="sc-1mf0nfy-0 eXyZFy" viewBox="0 0 13 22" xmlns:xlink="http://www.w3.org/1999/xlink">
             <title>Arrow down</title>

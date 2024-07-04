@@ -15,7 +15,6 @@ function tab_store_available()
     );
 }
 
-//Process store available in admin dashboard
 function process_store_available()
 {
     echo "<h1>Store Available Details</h1>";
@@ -29,12 +28,16 @@ function process_store_available()
             $name_store = sanitize_text_field($store['name_store']);
             $location_store = sanitize_text_field($store['location_store']);
             $link_store = esc_url($store['link_store']);
+            $start_time = sanitize_text_field($store['start_time']); 
+            $end_time = sanitize_text_field($store['end_time']); 
 
             if ($id > 0) {
                 $data_to_update = array(
                     'name_store' => $name_store,
                     'location_store' => $location_store,
                     'link_store' => $link_store,
+                    'start_time' => $start_time,
+                    'end_time' => $end_time, 
                 );
 
                 $where = array('id' => $id);
@@ -49,6 +52,8 @@ function process_store_available()
                     'name_store' => $name_store,
                     'location_store' => $location_store,
                     'link_store' => $link_store,
+                    'start_time' => $start_time,
+                    'end_time' => $end_time,
                 );
 
                 $wpdb->insert('fcs_data_store_available', $data_to_insert);
@@ -62,6 +67,8 @@ function process_store_available()
         $new_name_store = sanitize_text_field($_POST['new_name_store']);
         $new_location_store = sanitize_text_field($_POST['new_location_store']);
         $new_link_store = esc_url($_POST['new_link_store']);
+        $new_start_time = sanitize_text_field($_POST['new_start_time']);
+        $new_end_time = sanitize_text_field($_POST['new_end_time']);
 
         $max_id = $wpdb->get_var("SELECT MAX(id) FROM fcs_data_store_available");
         $next_id = intval($max_id) + 1;
@@ -71,6 +78,8 @@ function process_store_available()
             'name_store' => $new_name_store,
             'location_store' => $new_location_store,
             'link_store' => $new_link_store,
+            'start_time' => $new_start_time, 
+            'end_time' => $new_end_time, 
         );
 
         $wpdb->insert('fcs_data_store_available', $data_to_insert);
@@ -106,6 +115,13 @@ function process_store_available()
                     <label for="link_store_<?php echo esc_attr($store->id); ?>">Link Map:</label>
                     <input type="url" id="link_store_<?php echo esc_attr($store->id); ?>" name="stores[<?php echo esc_attr($store->id); ?>][link_store]" value="<?php echo esc_attr($store->link_store); ?>" required>
 
+                    <!-- New Fields -->
+                    <label for="start_time_<?php echo esc_attr($store->id); ?>">Start Time:</label>
+                    <input type="time" id="start_time_<?php echo esc_attr($store->id); ?>" name="stores[<?php echo esc_attr($store->id); ?>][start_time]" value="<?php echo esc_attr($store->start_time); ?>" required>
+
+                    <label for="end_time_<?php echo esc_attr($store->id); ?>">End Time:</label>
+                    <input type="time" id="end_time_<?php echo esc_attr($store->id); ?>" name="stores[<?php echo esc_attr($store->id); ?>][end_time]" value="<?php echo esc_attr($store->end_time); ?>" required>
+
                     <!-- Delete Button -->
                     <input type="hidden" name="delete_id" value="<?php echo esc_attr($store->id); ?>">
                     <input type="submit" name="delete_store" value="Delete Store">
@@ -130,12 +146,20 @@ function process_store_available()
 
             <label for="new_link_store">Link Map:</label>
             <input type="url" id="new_link_store" name="new_link_store" required>
+
+            <!-- New Fields -->
+            <label for="new_start_time">Start Time:</label>
+            <input type="time" id="new_start_time" name="new_start_time" required>
+
+            <label for="new_end_time">End Time:</label>
+            <input type="time" id="new_end_time" name="new_end_time" required>
         </div>
         <br>
         <input type="submit" name="add_store" value="Add New Store">
     </form>
 <?php
 }
+
 
 
 // shortcode pickup
@@ -152,7 +176,10 @@ function pickup_information_shortcode()
             <button class="btn-back-pickup-order"><img width="20" height="20" src="/wp-content/uploads/2024/07/back.png"></button>
             <a id="back-pickup-order" class="d-none" href="#order-popup-nav"></a>
             <p>Pickup</p>
-            <button title="Close (Esc)" type="button" class="mfp-close close-custom w-auto"><img width="20" height="20" src="/wp-content/uploads/2024/07/close.png"></button>
+            <button title="Close (Esc)" type="button" class="mfp-close btn-close close-custom w-auto"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg></button>
         </div>
         <div class="infor-pickup-content">
             <h3>Select a Pickup Store</h3>
@@ -182,15 +209,21 @@ function pickup_information_shortcode()
                             <p class="locationstore"><? echo esc_html($store->location_store) ?></p>
                         </div>
                         <p class="idstore"><? echo esc_html($store->id) ?></p>
+                        <?php
+                        $storeCurrentDateTime = new DateTime();
+                        $storeCurrentDateTime->modify('+1 day');
+                        $storeCurrentDateTime = $storeCurrentDateTime->format('j M Y');
+                        ?>
                         <div class="time-infor-items">
                             <h4>Earliest Collection Time</h4>
-                            <p>Tomorrow, 28 Jun 2024 (11:30 AM - 12:30 PM)</p>
+                            <p>Tomorrow, <? echo esc_html($storeCurrentDateTime) ?> (11:30 AM - 12:30 PM)</p>
                         </div>
                     </div>
                 <?php } ?>
             </div>
         </div>
         <div class="action-pickup">
+            <div id="notification" style="display:none; color:red; text-align:center;padding:5px;"></div>
             <button class="button-selected-store">Continue with Selection</button>
             <a class="d-none" id="calendar-pickup" href="#calendar-pickup"></a>
         </div>
@@ -212,7 +245,10 @@ function custom_pickup_calendar_shortcode()
             <button class="btn-back-pickup-store"><img width="20" height="20" src="/wp-content/uploads/2024/07/back.png"></button>
             <a id="back-store" class="d-none" href="#confirmorder"></a>
             <p>Pickup</p>
-            <button title="Close (Esc)" type="button" class="mfp-close close-custom w-auto"><img width="20" height="20" src="/wp-content/uploads/2024/07/close.png"></button>
+            <button title="Close (Esc)" type="button" class="mfp-close  btn-close close-custom w-auto"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg></button>
         </div>
         <div class="infor-pickup-content">
             <div id="pickup-info-container"></div>
@@ -220,7 +256,7 @@ function custom_pickup_calendar_shortcode()
             <?php echo do_shortcode('[pickup_date_calander]'); ?>
             <?php echo do_shortcode('[pickup_time_calander]'); ?>
             <div id="pickup-date_time" class="action-pickup">
-                <button>Continue with Selection</button>
+                <button>Next</button>
             </div>
         </div>
     <?php

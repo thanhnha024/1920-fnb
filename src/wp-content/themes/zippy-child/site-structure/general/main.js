@@ -12,6 +12,7 @@ $(document).ready(function () {
   backOrder();
   selectDinningPreferences();
   saveStoreToSession();
+  resetPickupSession();
 });
 //display_popup_pickup
 document.getElementById("pickupButton").addEventListener("click", function () {
@@ -33,7 +34,6 @@ document.getElementById("pickupButton").addEventListener("click", function () {
 });
 //save_store_to_session
 jQuery(document).ready(function ($) {
-  
   //Quantity mini cart
   $("body").on("change", ".quantity.buttons_added .qty", function () {
     var $input = $(this);
@@ -60,21 +60,6 @@ jQuery(document).ready(function ($) {
     });
   });
 
-  $('.btn-just-browsing').on('click', function() {
-    $.ajax({
-        url: '/wp-admin/admin-ajax.php',
-        method: 'POST',
-        data: {
-            action: 'reset_pickup_session'
-        },
-        success: function() {
-            window.location.href = '/order';
-        },
-        error: function() {
-            alert('An error occurred. Please try again.');
-        }
-    });
-});
 });
 
 //Event click view map on pop up
@@ -127,7 +112,9 @@ function backOrder() {
 function selectDinningPreferences() {
   $("body").on("click", ".btn.select-dinning-preferences", function (e) {
     e.preventDefault();
-    var selectDinningPreferences = document.getElementById("select-dinning-preferences");
+    var selectDinningPreferences = document.getElementById(
+      "select-dinning-preferences"
+    );
     selectDinningPreferences.click();
   });
 }
@@ -138,7 +125,6 @@ function saveStoreToSession() {
       .closest(".infor-pickup")
       .find(".items-infor-pickup-content.active")
       .data("store-id");
-
     if (storeId) {
       $.ajax({
         type: "POST",
@@ -148,14 +134,19 @@ function saveStoreToSession() {
           store_id: storeId,
         },
         success: function (response) {
-          console.log(response);
           var calendarPickupLink = document.getElementById("calendar-pickup");
           calendarPickupLink.click();
+
+          $("#notification").hide();
 
           // Render the HTML segment
           if (response.success && response.data.html_segment) {
             $("#pickup-info-container").html(response.data.html_segment);
           }
+          if (response.success && response.data.$html_select_time) {
+            $("#time-select-control").html(response.data.$html_select_time);
+          }
+
         },
         error: function (error) {
           console.log("Failed to save store.");
@@ -163,6 +154,27 @@ function saveStoreToSession() {
       });
     } else {
       console.error("No active store selected.");
+      $("#notification")
+        .text("No active store selected. Please select a store.")
+        .show();
     }
+  });
+}
+function resetPickupSession() {
+  $(".btn-just-browsing").click(function (e) {
+    e.preventDefault();
+    $.ajax({
+      url: "/wp-admin/admin-ajax.php",
+      method: "POST",
+      data: {
+        action: "reset_pickup_session",
+      },
+      success: function (response) {
+        window.location.href = "/order";
+      },
+      error: function () {
+        alert("An error occurred. Please try again.");
+      },
+    });
   });
 }

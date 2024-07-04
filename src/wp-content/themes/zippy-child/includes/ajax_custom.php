@@ -26,6 +26,11 @@ function save_store_to_session()
 
         $selected_store_id = WC()->session->get('selected_store_id');
         $store = select_store($selected_store_id);
+        // $start_time= $store->start_time;
+        $end_time = $store->end_time;
+        // $format_start_time = date('g:i A', strtotime($start_time));
+        $format_end_time = date('g:i A', strtotime($end_time));
+        
 
         $html_segment = '
                <div class="pickup edit-store-info">
@@ -40,8 +45,27 @@ function save_store_to_session()
                 </div>
             </div>
         ';
+        $html_select_time = '
+        <select id="time-select-option" class="time-select">
+            <option value="0">Please select a timeslot</option>';
+        
+        $step = 0;
+        $time_diff = get_diff_time($format_end_time);
 
-        wp_send_json_success(['store_id' => $selected_store_id, 'html_segment' => $html_segment]);
+        while ($step < $time_diff) {
+            $time_available = get_the_timetemp($step);
+            $html_select_time .= '
+            <option value="' . $time_available[0] . ' to ' . $time_available[1] . '">
+                ' . $time_available[0] . ' to ' . $time_available[1] . '
+            </option>';
+            $step++;
+        }
+
+        $html_select_time .= '
+        </select>';
+
+        
+        wp_send_json_success(['store_id' => $selected_store_id, 'html_segment' => $html_segment , "html" => $html_select_time]);
     }
 
     wp_die('Error: Store ID not provided.');
@@ -60,7 +84,8 @@ function custom_reset_sessions_on_order_complete($order_id)
 add_action('wp_ajax_reset_pickup_session', 'reset_pickup_session');
 add_action('wp_ajax_nopriv_reset_pickup_session', 'reset_pickup_session');
 
-function reset_pickup_session() {
+function reset_pickup_session()
+{
     WC()->session->set('pickupstatus', null);
     WC()->session->set('selected_store_id', null);
     WC()->session->set('_pickup_time', null);

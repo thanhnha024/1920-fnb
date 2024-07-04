@@ -45,13 +45,17 @@ function get_the_next_day($number, $currentDatePrams = '')
 
   // Calculate the next day using strtotime() function
   $nextDayTimestamp = strtotime($timetemp, strtotime($currentDate));
-
+  $datetime = new DateTime('tomorrow');
+  $tomorow = strtotime($datetime->format('Y-m-d'));
+  $fomatedDate = date('D, j M Y', $nextDayTimestamp);
+  if($nextDayTimestamp == $tomorow){
+    $fomatedDate = 'Tomorow,' .date(' j M Y', $nextDayTimestamp);
+  }
   $date_time = array();
   // Format the next day's date, month, and day
   $nextDayDate = date('d', $nextDayTimestamp);
   $nextDayMonth = date('F', $nextDayTimestamp);
   $nextDayDay = date('D', $nextDayTimestamp);
-  $fomatedDate = date('D,j M Y', $nextDayTimestamp);
   $shortDate = date('Y-m-d', $nextDayTimestamp);
 
   $date_time = array(
@@ -71,7 +75,7 @@ function select_store($check_store_id)
   global $wpdb;
   $store = $wpdb->get_row(
     $wpdb->prepare(
-      "SELECT name_store, location_store FROM fcs_data_store_available WHERE id = %d",
+      "SELECT name_store, location_store , start_time , end_time FROM fcs_data_store_available WHERE id = %d",
       $check_store_id
     )
   );
@@ -83,7 +87,6 @@ function get_the_timetemp($timebonus)
 {
 
   $currentDateTime =  date('Y-m-d h A');
-  var_dump($currentDateTime);
 
   for ($i = 0; $i < 2; $i++) {
     $timetemp =   $timebonus == 0 && $i == 0 ? 'now' : '+' . $timebonus + $i . ' hour' ; //+1 hour 
@@ -98,6 +101,11 @@ function get_the_timetemp($timebonus)
 function get_diff_time($time_end, $start_time = ''): int
 {
   $startTime = new DateTime('h A');
+  // var_dump($startTime);
+  if($start_time){
+    $startTime = new DateTime( $start_time);
+  }
+  
 
   $endTime = new DateTime($time_end);
   $interval = $startTime->diff($endTime);
