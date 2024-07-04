@@ -1,6 +1,6 @@
 @import "mixins";
 
-@import "fonts";
+// @import "fonts";
 @import "variables";
 
 @import "animation";
@@ -161,9 +161,23 @@
     display: none;
   }
 }
-.edit-store-info {
+.pickup.edit-store-info {
   padding: 20px;
+  margin: 0 ;
+}
+.edit-store-info {
+  padding: 20px 0;
+  margin: 0 20px;
   .store-info {
+    padding-right: 30px;
+    color: #5f3327;
+  }
+}
+.edit-date-time{
+  border-top: 1px solid #5f3327;
+  padding:20px 0;
+  margin: 0 20px;
+  .date-info {
     padding-right: 30px;
     color: #5f3327;
   }
@@ -289,6 +303,34 @@ a.remove {
   margin-bottom: 0;
   margin-right: 0;
 }
+.btn-back-pickup-store ,.btn-back-pickup-order {
+  margin-bottom: 0;
+  margin-right: 0;
+}
+.infor-pickup-title{
+  .close-custom{
+   padding: 0 15px;
+  }
+}
+.btn-just-browsing{
+  span{
+    text-transform: capitalize;
+
+  }
+}
+.widget_shopping_cart_content{
+  .woocommerce-mini-cart__buttons{
+    display: none;
+  }
+}
+.btn.select-dinning-preferences{
+  line-height: normal;
+  span{
+    text-transform: capitalize;
+    font-weight: 400;
+  }
+
+}
 //custom class css
 .text-secondary {
   color: #5f3327 !important;
@@ -358,6 +400,9 @@ a.remove {
 }
 .mb-0 {
   margin-bottom: 0 !important;
+}
+.w-auto{
+  width: auto !important;
 }
 .w-100 {
   width: 100% !important;

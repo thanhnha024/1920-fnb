@@ -29,12 +29,12 @@ function pickup_date_calander_callback()
     </div>
     <div class="wrapper">
       <div id="calendar-control-week" class="wrapper-date-box">
-        <?php $i = 0; ?>
+        <?php $i = 1; ?>
 
-        <?php while ($i < 5) : ?>
+        <?php while ($i < 6) : ?>
           <?php $date_time = get_the_next_day($i); ?>
 
-          <button class="date-box <?php if ($i == 0) echo 'selected'; ?>" data-date="<?php echo ($date_time['fomated_date']); ?>">
+          <button class="date-box <?php if ($i == 1) echo 'selected'; ?>" data-date="<?php echo ($date_time['fomated_date']); ?>">
             <span class="day"><?php echo ($date_time['day']); ?></span>
             <div class="wrapper-date">
               <span class="date"><?php echo ($date_time['date']); ?></span>

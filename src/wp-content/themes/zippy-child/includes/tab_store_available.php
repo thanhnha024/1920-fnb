@@ -148,12 +148,14 @@ function pickup_information_shortcode()
 
 ?>
     <div class="infor-pickup">
-        <div class="infor-pickup-title">
+        <div class="infor-pickup-title d-flex align-items-center justify-content-between">
+            <button class="btn-back-pickup-order"><img width="20" height="20" src="/wp-content/uploads/2024/07/back.png"></button>
+            <a id="back-pickup-order" class="d-none" href="#order-popup-nav"></a>
             <p>Pickup</p>
+            <button title="Close (Esc)" type="button" class="mfp-close close-custom w-auto"><img width="20" height="20" src="/wp-content/uploads/2024/07/close.png"></button>
         </div>
         <div class="infor-pickup-content">
             <h3>Select a Pickup Store</h3>
-
             <div class="row-infor-pickup">
                 <?php if (!$results) { ?>
                     <p>No stores available.</p>
@@ -206,9 +208,11 @@ function custom_pickup_calendar_shortcode()
 ?>
 
     <div class="infor-pickup">
-        <div class="infor-pickup-title">
+        <div class="infor-pickup-title d-flex align-items-center justify-content-between">
+            <button class="btn-back-pickup-store"><img width="20" height="20" src="/wp-content/uploads/2024/07/back.png"></button>
+            <a id="back-store" class="d-none" href="#confirmorder"></a>
             <p>Pickup</p>
-            <button title="Close (Esc)" type="button" class="mfp-close close-custom">x</button>
+            <button title="Close (Esc)" type="button" class="mfp-close close-custom w-auto"><img width="20" height="20" src="/wp-content/uploads/2024/07/close.png"></button>
         </div>
         <div class="infor-pickup-content">
             <div id="pickup-info-container"></div>
