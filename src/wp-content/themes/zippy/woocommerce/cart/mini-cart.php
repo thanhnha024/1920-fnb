@@ -114,12 +114,6 @@ do_action('woocommerce_before_mini_cart'); ?>
 		do_action('woocommerce_widget_shopping_cart_total');
 		?>
 	</p>
-
-	<?php do_action('woocommerce_widget_shopping_cart_before_buttons'); ?>
-	<p class="woocommerce-mini-cart__buttons buttons"><?php do_action('woocommerce_widget_shopping_cart_buttons'); ?></p>
-
-	<?php do_action('woocommerce_widget_shopping_cart_after_buttons'); ?>
-
 <?php else : ?>
 
 	<p class="woocommerce-mini-cart__empty-message"><?php esc_html_e('No products in the cart.', 'woocommerce'); ?></p>

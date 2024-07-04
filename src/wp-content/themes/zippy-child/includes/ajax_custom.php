@@ -28,7 +28,7 @@ function save_store_to_session()
         $store = select_store($selected_store_id);
 
         $html_segment = '
-               <div class="edit-store-info">
+               <div class="pickup edit-store-info">
                   <h4 class="fs-14px fw-600 text-secondary">Pickup Store</h4>
                   <div class="d-flex align-items-center justify-content-between">
                     <div class="store-info fs-14px">
@@ -57,17 +57,15 @@ function custom_reset_sessions_on_order_complete($order_id)
     WC()->session->set('_pickup_date', null);
 }
 
-add_action('wp_ajax_woocommerce_remove_cart_item', 'check_empty_cart_and_reset_session');
-add_action('wp_ajax_nopriv_woocommerce_remove_cart_item', 'check_empty_cart_and_reset_session');
+add_action('wp_ajax_reset_pickup_session', 'reset_pickup_session');
+add_action('wp_ajax_nopriv_reset_pickup_session', 'reset_pickup_session');
 
-function check_empty_cart_and_reset_session()
-{
-    if (WC()->cart->is_empty()) {
-        WC()->session->set('pickupstatus', null);
-        WC()->session->set('selected_store_id', null);
-        WC()->session->set('_pickup_time', null);
-        WC()->session->set('_pickup_date', null);
-    }
+function reset_pickup_session() {
+    WC()->session->set('pickupstatus', null);
+    WC()->session->set('selected_store_id', null);
+    WC()->session->set('_pickup_time', null);
+    WC()->session->set('_pickup_date', null);
+    wp_send_json_success();
 }
 
 add_action('template_redirect', 'clear_cart_action');

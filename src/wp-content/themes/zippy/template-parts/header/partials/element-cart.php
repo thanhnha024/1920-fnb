@@ -87,25 +87,47 @@ if (is_woocommerce_activated() && flatsome_is_wc_cart_available()) {
             <span id="cart-items-count" class="fs-14px text-secondary"> <?php echo sprintf(__('You have added %d items', 'woocommerce'), WC()->cart->get_cart_contents_count()); ?></span>
           </div>
           <div class="edit-store-info">
-                <?php
-                  $store_id = WC()->session->get('selected_store_id');
-                  $store = select_store($store_id); 
-                ?>
-                <?php if ($store) { ?>
-                  <h4 class="fs-14px fw-600 text-secondary">Pickup Store</h4>
-                  <div class="d-flex align-items-center justify-content-between">
-                    <div class="store-info fs-14px">
-                      <span><?php echo esc_html($store->name_store); ?></span>
-                      <span><?php echo esc_html($store->location_store); ?></span>
-                    </div>
-                    <a href="#confirmorder"><img width="20" height="20" src="/wp-content/uploads/2024/07/pen-1.png"></a>
+            <?php
+            $store_id = WC()->session->get('selected_store_id');
+            $store = select_store($store_id);
+            ?>
+            <?php if ($store) { ?>
+              <h4 class="fs-14px fw-600 text-secondary">Pickup Store</h4>
+              <div class="d-flex align-items-center justify-content-between">
+                <div class="store-info fs-14px">
+                  <p class="mb-0"><?php echo esc_html($store->name_store); ?></p>
+                  <p class="mb-0"><?php echo esc_html($store->location_store); ?></p>
                 </div>
-                <?php } ?>
-            </div>
+                <a href="#confirmorder"><img width="20" height="20" src="/wp-content/uploads/2024/07/pen-1.png"></a>
+              </div>
+            <?php } ?>
+          </div>
+          <div class="edit-date-time">
+            <?php
+             $time = WC()->session->get('_pickup_time');
+             $date = WC()->session->get('_pickup_date');
+            //  $formattedDate = $date->format('D, j M Y');
+            //  var_dump($formattedDate);
+            ?>
+            <?php if ($time && $date) { ?>
+              <h4 class="fs-14px fw-600 text-secondary">Pickup Time</h4>
+              <div class="d-flex align-items-center justify-content-between">
+                <div class="date-info fs-14px">
+                  <p class="mb-0"><?php echo esc_html($date); ?></p>
+                  <p class="mb-0"><?php echo esc_html($time); ?></p>
+                </div>
+                <a href="#calendar-pickup"><img width="20" height="20" src="/wp-content/uploads/2024/07/pen-1.png"></a>
+              </div>
+            <?php } ?>
+          </div>
           <div class="widget_shopping_cart_content">
-            
-            <hr/>
             <?php woocommerce_mini_cart(); ?>
+          </div>
+          <div class="mini-cart-buttons">
+            <?php do_action('woocommerce_widget_shopping_cart_before_buttons'); ?>
+            <p class="woocommerce-mini-cart__buttons buttons"><?php do_action('woocommerce_widget_shopping_cart_buttons'); ?></p>
+            <a id="select-dinning-preferences" class="d-none" href="#order-popup-nav"></a>
+            <?php do_action('woocommerce_widget_shopping_cart_after_buttons'); ?>
           </div>
           <?php if ($custom_cart_content) {
             echo '<div class="header-cart-content">' . do_shortcode($custom_cart_content) . '</div>';

@@ -51,7 +51,7 @@ function get_the_next_day($number, $currentDatePrams = '')
   $nextDayDate = date('d', $nextDayTimestamp);
   $nextDayMonth = date('F', $nextDayTimestamp);
   $nextDayDay = date('D', $nextDayTimestamp);
-  $fomatedDate = date('Y-m-d', $nextDayTimestamp);
+  $fomatedDate = date('D,j M Y', $nextDayTimestamp);
 
   $date_time = array(
     'date' => $nextDayDate,

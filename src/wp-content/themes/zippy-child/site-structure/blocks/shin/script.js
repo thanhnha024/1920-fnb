@@ -1,8 +1,13 @@
 function initCalendar(updatePrams = Object) {
+  let currentDate = new Date();
+  currentDate.setDate(currentDate.getDate() + 1);
   let options = {
+    date: {
+      today:  currentDate,
+    },
     settings: {
       range: {
-        min: getCurrenDate(),
+        min: getCurrentDate(),
       },
       selected: {
         dates: [updatePrams.all],
@@ -21,16 +26,16 @@ function initCalendar(updatePrams = Object) {
   calendar.init();
 }
 
-async function getCurrenDate() {
-  let Date_current = new Date();
-  let year = Date_current.getFullYear();
-  let month = ("0" + (Date_current.getMonth() + 1)).slice(-2);
-  let day = ("0" + Date_current.getDate()).slice(-2);
+function getCurrentDate() {
+  let currentDate = new Date();
+  currentDate.setDate(currentDate.getDate() + 1); // Get tomorrow's date
 
-  // Construct the date string in yyyy-mm-dd format
-  let currentDate = `${year}-${month}-${day}`;
+  // Format the date in yyyy-mm-dd format
+  let year = currentDate.getFullYear();
+  let month = String(currentDate.getMonth() + 1).padStart(2, '0'); // January is 0
+  let day = String(currentDate.getDate()).padStart(2, '0');
 
-  return currentDate;
+  return `${year}-${month}-${day}`;
 }
 
 function toggleMoreDate() {
