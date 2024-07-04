@@ -50,7 +50,7 @@ function toggleMoreDate() {
 
 function activeBoxDate(time) {
   $(".date-box").each(function (index, element) {
-    let selected_date = $(this).attr("data-date");
+    let selected_date = $(this).attr("data-date-short");
     $(".date-box").removeClass("selected");
 
     if (time == selected_date) {
@@ -86,7 +86,7 @@ function chooseDate() {
       //active class
       $(this).addClass("selected");
 
-      let selected_date = $(this).attr("data-date");
+      let selected_date = $(this).attr("data-date-short");
 
       var partsDate = splitDate(selected_date);
       initCalendar(partsDate);

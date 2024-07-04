@@ -34,7 +34,7 @@ function pickup_date_calander_callback()
         <?php while ($i < 6) : ?>
           <?php $date_time = get_the_next_day($i); ?>
 
-          <button class="date-box <?php if ($i == 1) echo 'selected'; ?>" data-date="<?php echo ($date_time['fomated_date']); ?>">
+          <button class="date-box <?php if ($i == 1) echo 'selected'; ?>" data-date-short="<?php echo ($date_time['short_date']); ?>" data-date="<?php echo ($date_time['fomated_date']); ?>">
             <span class="day"><?php echo ($date_time['day']); ?></span>
             <div class="wrapper-date">
               <span class="date"><?php echo ($date_time['date']); ?></span>

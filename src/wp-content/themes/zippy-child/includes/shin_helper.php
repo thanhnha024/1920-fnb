@@ -52,12 +52,14 @@ function get_the_next_day($number, $currentDatePrams = '')
   $nextDayMonth = date('F', $nextDayTimestamp);
   $nextDayDay = date('D', $nextDayTimestamp);
   $fomatedDate = date('D,j M Y', $nextDayTimestamp);
+  $shortDate = date('Y-m-d', $nextDayTimestamp);
 
   $date_time = array(
     'date' => $nextDayDate,
     'day' => $nextDayDay,
     'month' => $nextDayMonth,
-    'fomated_date' => $fomatedDate
+    'fomated_date' => $fomatedDate,
+    'short_date' => $shortDate
 
   );
   return $date_time;

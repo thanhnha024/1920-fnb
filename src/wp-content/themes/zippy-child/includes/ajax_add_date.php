@@ -50,7 +50,7 @@ function render_date()
   <?php while ($i < 5) : ?>
     <?php $date_time = get_the_next_day($i, $date); ?>
 
-    <button class="date-box" data-date="<?php echo ($date_time['fomated_date']); ?>">
+    <button class="date-box" data-date-short="<?php echo ($date_time['short_date']); ?>" data-date="<?php echo ($date_time['fomated_date']); ?>">
       <span class="day"><?php echo ($date_time['day']); ?></span>
       <div class="wrapper-date">
         <span class="date"><?php echo ($date_time['date']); ?></span>
