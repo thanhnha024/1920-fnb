@@ -85,7 +85,7 @@ function select_store($check_store_id)
 
 function get_the_timetemp($timebonus)
 {
-
+ 
   $currentDateTime =  date('Y-m-d h A');
 
   for ($i = 0; $i < 2; $i++) {
