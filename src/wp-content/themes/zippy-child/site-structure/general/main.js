@@ -118,6 +118,7 @@ function selectDinningPreferences() {
     selectDinningPreferences.click();
   });
 }
+
 function saveStoreToSession() {
   $(".button-selected-store").click(function (e) {
     e.preventDefault();
@@ -143,8 +144,8 @@ function saveStoreToSession() {
           if (response.success && response.data.html_segment) {
             $("#pickup-info-container").html(response.data.html_segment);
           }
-          if (response.success && response.data.$html_select_time) {
-            $("#time-select-control").html(response.data.$html_select_time);
+          if (response.success && response.data.html_select_time) {
+            $("#time-select-control").html(response.data.html_select_time);
           }
 
         },

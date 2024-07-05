@@ -208,15 +208,18 @@ function pickup_information_shortcode()
                             </svg>
                             <p class="locationstore"><? echo esc_html($store->location_store) ?></p>
                         </div>
-                        <p class="idstore"><? echo esc_html($store->id) ?></p>
                         <?php
                         $storeCurrentDateTime = new DateTime();
                         $storeCurrentDateTime->modify('+1 day');
                         $storeCurrentDateTime = $storeCurrentDateTime->format('j M Y');
+                        $start_time = $store->start_time;
+                        $formatted_start_time = date('h:i A', strtotime($start_time));
+                        $next_time = date('H:i A', strtotime('+1 hour', strtotime($start_time)));
                         ?>
                         <div class="time-infor-items">
                             <h4>Earliest Collection Time</h4>
-                            <p>Tomorrow, <? echo esc_html($storeCurrentDateTime) ?> (11:30 AM - 12:30 PM)</p>
+                            <p>Tomorrow, <?php echo esc_html($storeCurrentDateTime); ?> (<?php echo $formatted_start_time . ' - ' . $next_time; ?>)</p>
+
                         </div>
                     </div>
                 <?php } ?>

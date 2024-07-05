@@ -86,38 +86,38 @@ if (is_woocommerce_activated() && flatsome_is_wc_cart_available()) {
             <h4 class="fs-16px fw-600 text-secondary mb-0"><?php _e('Your Cart', 'woocommerce'); ?></h4>
             <span id="cart-items-count" class="fs-14px text-secondary"> <?php echo sprintf(__('You have added %d items', 'woocommerce'), WC()->cart->get_cart_contents_count()); ?></span>
           </div>
-          <div class="edit-store-info">
+          <div class="edit-info-store-and-date-time d-flex align-items-center">
             <?php
             $store_id = WC()->session->get('selected_store_id');
             $store = select_store($store_id);
+            $time = WC()->session->get('_pickup_time');
+            $date = WC()->session->get('_pickup_date');
             ?>
-            <?php if ($store) { ?>
-              <h4 class="fs-14px fw-600 text-secondary">Pickup Store</h4>
-              <div class="d-flex align-items-center justify-content-between">
-                <div class="store-info fs-14px">
-                  <p class="mb-0"><?php echo esc_html($store->name_store); ?></p>
-                  <p class="mb-0"><?php echo esc_html($store->location_store); ?></p>
+            <div class="content-edit-info">
+              <?php if ($store) { ?>
+                <div class="store">
+                  <h4 class="fs-14px fw-600 text-secondary">Pickup Store</h4>
+                  <div class="store-info fs-14px">
+                    <p class="mb-0"><?php echo esc_html($store->name_store); ?></p>
+                    <p class="mb-0"><?php echo esc_html($store->location_store); ?></p>
+                  </div>
                 </div>
-                <a href="#confirmorder"><img width="20" height="20" src="/wp-content/uploads/2024/07/pen-1.png"></a>
-              </div>
-            <?php } ?>
-          </div>
-          <?php
-          $time = WC()->session->get('_pickup_time');
-          $date = WC()->session->get('_pickup_date');
-          ?>
-          <?php if ($time && $date) { ?>
-            <div class="edit-date-time">
-              <h4 class="fs-14px fw-600 text-secondary">Pickup Time</h4>
-              <div class="d-flex align-items-center justify-content-between">
-                <div class="date-info fs-14px">
-                  <p class="mb-0"><?php echo esc_html($date); ?></p>
-                  <p class="mb-0"><?php echo esc_html($time); ?></p>
+              <?php } ?>
+              <?php if ($time && $date) { ?>
+                <div class="date-time">
+                  <h4 class="fs-14px fw-600 text-secondary">Pickup Time</h4>
+                  <div class="date-info fs-14px">
+                    <p class="mb-0"><?php echo esc_html($date); ?></p>
+                    <p class="mb-0"><?php echo esc_html($time); ?></p>
+                  </div>
                 </div>
-                <a href="#calendar-pickup"><img width="20" height="20" src="/wp-content/uploads/2024/07/pen-1.png"></a>
-              </div>
+              <?php } ?>
             </div>
-          <?php } ?>
+            <div class="btn-edit-info-mini-cart">
+              <a href="#confirmorder"><img width="20" height="20" src="/wp-content/uploads/2024/07/pen-1.png"></a>
+            </div>
+          </div>
+
           <div class="widget_shopping_cart_content">
             <?php woocommerce_mini_cart(); ?>
           </div>
