@@ -26,6 +26,9 @@ function save_store_to_session()
 
         $selected_store_id = WC()->session->get('selected_store_id');
         $store = select_store($selected_store_id);
+        $start_time= $store->start_time;
+        $end_time = $store->end_time;
+
 
         $html_segment = '
                <div class="pickup edit-store-info">
@@ -40,8 +43,28 @@ function save_store_to_session()
                 </div>
             </div>
         ';
+        $html_select_time = '
+                <select id="time-select-option" class="time-select">
+                    <option value="0">Please select a timeslot</option>';
 
-        wp_send_json_success(['store_id' => $selected_store_id, 'html_segment' => $html_segment]);
+        $step = 0;
+        $time_diff = get_diff_time($start_time, $end_time);
+
+        while ($step < $time_diff) {
+            $time_available = get_the_timetemp($step, $start_time);
+            $html_select_time .= '
+                    <option value="' . $time_available[0] . ' to ' . $time_available[1] . '">
+                        ' . $time_available[0] . ' to ' . $time_available[1] . '
+                    </option>';
+            $step++;
+        }
+
+        $html_select_time .= '
+                </select>';
+
+
+
+        wp_send_json_success(['store_id' => $selected_store_id, 'html_segment' => $html_segment, "html_select_time" => $html_select_time]);
     }
 
     wp_die('Error: Store ID not provided.');
@@ -60,7 +83,8 @@ function custom_reset_sessions_on_order_complete($order_id)
 add_action('wp_ajax_reset_pickup_session', 'reset_pickup_session');
 add_action('wp_ajax_nopriv_reset_pickup_session', 'reset_pickup_session');
 
-function reset_pickup_session() {
+function reset_pickup_session()
+{
     WC()->session->set('pickupstatus', null);
     WC()->session->set('selected_store_id', null);
     WC()->session->set('_pickup_time', null);
@@ -98,7 +122,20 @@ function order_nav_button()
 }
 add_shortcode('order_menu', 'order_nav_button');
 
-
+function order_online_button()
+{
+    $checkStatus = WC()->session->get('pickupstatus');
+    $store_id = WC()->session->get('selected_store_id');
+    $time = WC()->session->get('_pickup_time');
+    $date = WC()->session->get('_pickup_date');
+    if ($time && $date && $store_id && $checkStatus == 1) {
+        $nav_link = '/order';
+    } else {
+        $nav_link = '#order-popup-nav';
+    }
+    echo '<a class="button primary button-custom-1" href="' . $nav_link . '"><span>ORDER ONLINE</span></a>';
+}
+add_shortcode('order_button', 'order_online_button');
 function enqueue_woocommerce_scripts()
 {
     if (class_exists('WooCommerce')) {

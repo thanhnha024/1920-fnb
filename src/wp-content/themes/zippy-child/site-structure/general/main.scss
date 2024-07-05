@@ -133,19 +133,20 @@
 .idstore {
   display: none;
 }
-.pickup_location_field {
+.pickup_location_field,
+.pickup_time_field {
   margin-bottom: 10px;
-}
-.pickup_location_field h4 {
-  font-size: 85%;
-  letter-spacing: 0;
-  text-transform: inherit;
-}
-.pickup_location_field p {
-  margin-bottom: 0px;
-  font-size: 85%;
-  letter-spacing: 0;
-  text-transform: inherit;
+  h4 {
+    font-size: 85%;
+    letter-spacing: 0;
+    text-transform: inherit;
+  }
+  p {
+    margin-bottom: 0px;
+    font-size: 85%;
+    letter-spacing: 0;
+    text-transform: inherit;
+  }
 }
 
 .table-store-pickup {
@@ -163,25 +164,25 @@
 }
 .pickup.edit-store-info {
   padding: 20px;
-  margin: 0 ;
+  margin: 0;
 }
-.edit-store-info {
-  padding: 20px 0;
-  margin: 0 20px;
-  .store-info {
-    padding-right: 30px;
+.edit-info-store-and-date-time {
+  padding: 20px;
+  .content-edit-info {
+    width: 90%;
+    padding-right: 90px;
+  }
+  .btn-edit-info-mini-cart {
+    width: 10%;
+  }
+  .store {
+    padding-bottom: 15px;
+  }
+  p {
     color: #5f3327;
   }
 }
-.edit-date-time{
-  border-top: 1px solid #5f3327;
-  padding:20px 0;
-  margin: 0 20px;
-  .date-info {
-    padding-right: 30px;
-    color: #5f3327;
-  }
-}
+
 .woocommerce-order-details {
   tr.shipping {
     display: none;
@@ -294,8 +295,8 @@ a.remove {
     font-size: 16px;
   }
 }
-#pickup-info-container{
-  .edit-store-info{
+#pickup-info-container {
+  .edit-store-info {
     box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 8px;
   }
 }
@@ -303,33 +304,32 @@ a.remove {
   margin-bottom: 0;
   margin-right: 0;
 }
-.btn-back-pickup-store ,.btn-back-pickup-order {
+.btn-back-pickup-store,
+.btn-back-pickup-order {
   margin-bottom: 0;
   margin-right: 0;
 }
-.infor-pickup-title{
-  .close-custom{
-   padding: 0 15px;
+.infor-pickup-title {
+  .close-custom {
+    padding: 0 15px;
   }
 }
-.btn-just-browsing{
-  span{
+.btn-just-browsing {
+  span {
     text-transform: capitalize;
-
   }
 }
-.widget_shopping_cart_content{
-  .woocommerce-mini-cart__buttons{
+.widget_shopping_cart_content {
+  .woocommerce-mini-cart__buttons {
     display: none;
   }
 }
-.btn.select-dinning-preferences{
+.btn.select-dinning-preferences {
   line-height: normal;
-  span{
+  span {
     text-transform: capitalize;
     font-weight: 400;
   }
-
 }
 //custom class css
 .text-secondary {
@@ -401,7 +401,7 @@ a.remove {
 .mb-0 {
   margin-bottom: 0 !important;
 }
-.w-auto{
+.w-auto {
   width: auto !important;
 }
 .w-100 {
@@ -464,9 +464,9 @@ a.remove {
 .mt-30px {
   margin-top: 30px !important;
 }
-.align-items-center{
-	align-items: center !important;
+.align-items-center {
+  align-items: center !important;
 }
-.d-none{
+.d-none {
   display: none !important;
 }

@@ -87,8 +87,19 @@ if ($show_downloads) {
 					$store_id = get_post_meta($order->get_id(), '_pickup_store_id', true);
 					$store = select_store($store_id);
 					?>
-					<span><?php echo esc_html($store->name_store); ?></span>
-					<span><?php echo esc_html($store->location_store); ?></span>
+					<p><?php echo esc_html($store->name_store); ?></p>
+					<p><?php echo esc_html($store->location_store); ?></p>
+				</td>
+			</tr>
+			<tr>
+				<th>Time Pickup:</th>
+				<td>
+					<?php
+					$time = get_post_meta($order->get_id(), '_pickup_time', true);
+					$date = get_post_meta($order->get_id(), '_pickup_date', true);
+					?>
+					<p><?php echo esc_html($date); ?></p>
+					<p><?php echo esc_html($time); ?></p>
 				</td>
 			</tr>
 			<?php
