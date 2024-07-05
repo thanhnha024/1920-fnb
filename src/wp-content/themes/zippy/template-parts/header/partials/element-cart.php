@@ -113,9 +113,11 @@ if (is_woocommerce_activated() && flatsome_is_wc_cart_available()) {
                 </div>
               <?php } ?>
             </div>
+            <?php if ($store || $time || $date) { ?>
             <div class="btn-edit-info-mini-cart">
               <a href="#confirmorder"><img width="20" height="20" src="/wp-content/uploads/2024/07/pen-1.png"></a>
             </div>
+            <?php } ?>
           </div>
 
           <div class="widget_shopping_cart_content">

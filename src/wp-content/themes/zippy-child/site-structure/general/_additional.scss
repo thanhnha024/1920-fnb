@@ -231,10 +231,12 @@ html {
   border-radius: 7px;
   margin-bottom: 15px;
 }
-#order-popup-nav a {
-  color: rgb(95, 51, 39);
-  background-color: rgb(255, 178, 91);
+#order-popup-nav {
+  .button.primary{
+    color: rgb(95, 51, 39);
+  }
 }
+
 
 #order-popup-nav b a {
   background: none;
