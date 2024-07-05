@@ -38,7 +38,7 @@ function save_store_to_session()
                       <span>' . esc_html($store->name_store) . '</span>
                       <span>' . esc_html($store->location_store) . '</span>
                     </div>
-                    <button class="edit-store-btn "><img width="20" height="20" src="/wp-content/uploads/2024/07/pen-1.png"></button>
+                    <button class="edit-store-btn "><svg width="21px" height="21px" viewBox="0 0 34 34"><title>Edit</title><g transform="translate(-3 -3)" fill="none" fill-rule="evenodd"><rect width="39" height="39" rx="5"></rect><path d="M33 12.289l-2.115 2.115-5.29-5.296 2.115-2.116a1.168 1.168 0 0 1 1.614 0L33 10.675c.444.444.444 1.17 0 1.614zM15.322 29.988l-5.29-5.297 13.676-13.696 5.29 5.297-13.676 13.696zM8.81 27.245l3.958 3.964-5.512 1.554 1.554-5.518zM34.888 8.788l-3.677-3.684c-.718-.718-3.311-2.077-5.381 0L7.197 23.75c-.163.164-.281.36-.34.582L4.05 34.33c-.13.463.006.96.34 1.306.339.346 1.018.405 1.306.34l9.992-2.815c.222-.059.418-.177.581-.34l18.62-18.646a3.82 3.82 0 0 0 0-5.388z" fill="#5f3327" stroke="#5f3327" stroke-width="0.5"></path></g></svg></button>
                     
                 </div>
             </div>

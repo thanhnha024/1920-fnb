@@ -63,7 +63,7 @@ function process_store_available()
             'link_store' => $new_link_store,
             'start_time' => $new_start_time,
             'end_time' => $new_end_time,
-            
+
         );
 
         $wpdb->insert('fcs_data_store_available', $data_to_insert);
@@ -98,7 +98,7 @@ function process_store_available()
 
                     <label for="link_store_<?php echo esc_attr($store->id); ?>">Link Map:</label>
                     <input type="url" id="link_store_<?php echo esc_attr($store->id); ?>" name="link_store" value="<?php echo esc_attr($store->link_store); ?>" required>
-                    
+
                     <!-- New Fields -->
                     <label for="start_time_<?php echo esc_attr($store->id); ?>">Start Time:</label>
                     <input type="time" id="start_time_<?php echo esc_attr($store->id); ?>" name="stores[<?php echo esc_attr($store->id); ?>][start_time]" value="<?php echo esc_attr($store->start_time); ?>" required>
@@ -154,7 +154,11 @@ function pickup_information_shortcode()
 ?>
     <div class="infor-pickup">
         <div class="infor-pickup-title d-flex align-items-center justify-content-between">
-            <button class="btn-back-pickup-order"><img width="20" height="20" src="/wp-content/uploads/2024/07/back.png"></button>
+            <button class="btn-back-pickup-order">
+                <svg width="18px" height="18px" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 34 26" fill="none">
+                    <path fill="#5f3327" fill-rule="evenodd" clip-rule="evenodd" d="M31.6103 15.1293L7.60885 15.1293L14.6693 22.1897C15.4584 22.9788 15.4584 24.26 14.6693 25.0492C13.8787 25.8383 12.5989 25.8383 11.8098 25.0492L1.29695 14.5377C0.507788 13.7472 0.507788 12.4674 1.29695 11.6769L11.8098 1.16543C12.5989 0.37487 13.8787 0.37487 14.6693 1.16543C15.4584 1.9546 15.4584 3.23576 14.6693 4.02492L7.60885 11.0853L31.6103 11.0853C32.7275 11.0853 33.633 11.9908 33.633 13.1066C33.633 14.2238 32.7275 15.1293 31.6103 15.1293Z"></path>
+                </svg>
+            </button>
             <a id="back-pickup-order" class="d-none" href="#order-popup-nav"></a>
             <p>Pickup</p>
             <button title="Close (Esc)" type="button" class="mfp-close btn-close close-custom w-auto"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
@@ -226,7 +230,11 @@ function custom_pickup_calendar_shortcode()
 
     <div class="infor-pickup">
         <div class="infor-pickup-title d-flex align-items-center justify-content-between">
-            <button class="btn-back-pickup-store"><img width="20" height="20" src="/wp-content/uploads/2024/07/back.png"></button>
+            <button class="btn-back-pickup-store">
+                <svg width="18px" height="18px" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 34 26" fill="none">
+                    <path fill="#5f3327" fill-rule="evenodd" clip-rule="evenodd" d="M31.6103 15.1293L7.60885 15.1293L14.6693 22.1897C15.4584 22.9788 15.4584 24.26 14.6693 25.0492C13.8787 25.8383 12.5989 25.8383 11.8098 25.0492L1.29695 14.5377C0.507788 13.7472 0.507788 12.4674 1.29695 11.6769L11.8098 1.16543C12.5989 0.37487 13.8787 0.37487 14.6693 1.16543C15.4584 1.9546 15.4584 3.23576 14.6693 4.02492L7.60885 11.0853L31.6103 11.0853C32.7275 11.0853 33.633 11.9908 33.633 13.1066C33.633 14.2238 32.7275 15.1293 31.6103 15.1293Z"></path>
+                </svg>
+            </button>
             <a id="back-store" class="d-none" href="#confirmorder"></a>
             <p>Pickup</p>
             <button title="Close (Esc)" type="button" class="mfp-close  btn-close close-custom w-auto"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">

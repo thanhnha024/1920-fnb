@@ -1,0 +1,13 @@
+.btn-just-browsing {
+  span {
+    text-transform: none !important;
+    font-size: 14px !important;
+  }
+}
+.button-custom-1,.button-custom-2{
+  background: #ffb35c !important;
+  padding: 10px 20px !important;
+  &:hover{
+    background: #5f3327;
+  }
+}
