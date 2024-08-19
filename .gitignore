@@ -1,11 +1,34 @@
+# Ignore thir-party
+package-lock.json
+
 node_modules
-src/wp-content/uploads
-# src/wp-content/plugins
-# .env.sample
-# docker-compose.yml
-# Dockerfile
-# gulpfile.js
-# package.json
-./package-lock.json
-# src/wp-content/plugins
-# npx tailwindcss -i ./tailwind.css -o ./style.css --watch
+
+src/wp-content/themes/*/*/dist
+
+
+# Ignore large folder and folder cache
+src/wp-content/*
+
+# wp-content/uploads
+!src/wp-content/themes
+
+!src/wp-content/plugins
+
+!src/wp-content/.htaccess
+
+!src/wp-content/index.php
+
+# Ignore plugins default
+src/wp-content/plugins/akismet
+
+src/wp-content/plugins/hello.php
+
+# Ignore themes default
+src/wp-content/themes/twentytwentyone
+
+src/wp-content/themes/twentytwentytwo
+
+src/wp-content/themes/twentytwentythree
+
+# Ignore docker file
+.env

@@ -1,0 +1,62 @@
+name: Wordpress Notifications Git Action
+
+run-name: FCS Wordpress GitHub Actions 🚀
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: read
+  packages: none
+
+on:
+  push:
+    branches:
+      - update-*
+      - main
+jobs:
+  create-pull-request:
+    runs-on: ubuntu-latest
+    # Map a step output to a job output
+    outputs:
+      pull_request_url: ${{ steps.cpr.outputs.pull-request-url }}
+    steps:
+      - name: Auto create pull request when someone push new changes
+        uses: actions/checkout@v4
+      - name: Create Pull Request
+        id: cpr
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: upadte new change on ${{ github.ref }}
+          title: New update adjustment by ${{ github.actor }}
+          author: ${{ github.actor }} <${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com>
+          body-path: './.github/pull_request_template.md'
+          branch: ${{ github.ref }}
+          base: master
+          reviewers: ThanhNha
+          delete-branch: true
+      - name: Check outputs
+        if: ${{ steps.cpr.outputs.pull-request-number }}
+        run: |
+          echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
+          echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
+  notification-to-telegram:
+    runs-on: ubuntu-latest
+    needs: create-pull-request
+    steps:
+      - name: send telegram message on push
+        uses: appleboy/telegram-action@master
+        with:
+          to: -1002034905977
+          token: 6611988217:AAERCNw3lNbdpABmMztQudQXBuPcp1jsKdk
+          format: html
+          message: |
+            💥 <i><b>Please check new commit</b></i> 💥:
+            <b>${{ github.actor }}</b> created commit 🔑
+
+            <b>Commit message 💬:</b> ${{ github.event.commits[0].message }}
+            <b>Pull request URL 🎯:</b> ${{needs.create-pull-request.outputs.pull_request_url}}
+
+            <b>Details:</b>
+            Project name 🚀: ${{ github.repository }}
+            Project link 🔎: https://github.com/${{ github.repository }}
+            See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
