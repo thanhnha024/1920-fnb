@@ -1,8 +1,5 @@
 <?php
-add_action( 'admin_enqueue_scripts', 'load_admin_style' );
-function load_admin_style(){
-    echo "<style>.check{background: red}</style>";
-}
+
 //Register tab store available in admin dashboard
 add_action('admin_menu', 'tab_store_available');
 function tab_store_available()
@@ -21,7 +18,7 @@ function tab_store_available()
 //Process store available in admin dashboard
 function process_store_available()
 {
-    echo "<h1 class='check'>Store Available Details</h1>";
+    echo "<h1>Store Available Details</h1>";
     global $wpdb;
 
     if (isset($_POST['update_store'])) {
@@ -66,7 +63,7 @@ function process_store_available()
             'link_store' => $new_link_store,
             'start_time' => $new_start_time,
             'end_time' => $new_end_time,
-            
+
         );
 
         $wpdb->insert('fcs_data_store_available', $data_to_insert);
@@ -101,7 +98,7 @@ function process_store_available()
 
                     <label for="link_store_<?php echo esc_attr($store->id); ?>">Link Map:</label>
                     <input type="url" id="link_store_<?php echo esc_attr($store->id); ?>" name="link_store" value="<?php echo esc_attr($store->link_store); ?>" required>
-                    
+
                     <!-- New Fields -->
                     <label for="start_time_<?php echo esc_attr($store->id); ?>">Start Time:</label>
                     <input type="time" id="start_time_<?php echo esc_attr($store->id); ?>" name="stores[<?php echo esc_attr($store->id); ?>][start_time]" value="<?php echo esc_attr($store->start_time); ?>" required>
@@ -134,6 +131,7 @@ function process_store_available()
             <!-- New Fields -->
             <label for="new_start_time">Start Time:</label>
             <input type="time" id="new_start_time" name="new_start_time" required>
+
             <label for="new_end_time">End Time:</label>
             <input type="time" id="new_end_time" name="new_end_time" required>
         </div>
@@ -142,8 +140,6 @@ function process_store_available()
     </form>
 <?php
 }
-
-
 
 
 
@@ -157,12 +153,21 @@ function pickup_information_shortcode()
 
 ?>
     <div class="infor-pickup">
-        <div class="infor-pickup-title">
+        <div class="infor-pickup-title d-flex align-items-center justify-content-between">
+            <button class="btn-back-pickup-order">
+                <svg width="18px" height="18px" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 34 26" fill="none">
+                    <path fill="#5f3327" fill-rule="evenodd" clip-rule="evenodd" d="M31.6103 15.1293L7.60885 15.1293L14.6693 22.1897C15.4584 22.9788 15.4584 24.26 14.6693 25.0492C13.8787 25.8383 12.5989 25.8383 11.8098 25.0492L1.29695 14.5377C0.507788 13.7472 0.507788 12.4674 1.29695 11.6769L11.8098 1.16543C12.5989 0.37487 13.8787 0.37487 14.6693 1.16543C15.4584 1.9546 15.4584 3.23576 14.6693 4.02492L7.60885 11.0853L31.6103 11.0853C32.7275 11.0853 33.633 11.9908 33.633 13.1066C33.633 14.2238 32.7275 15.1293 31.6103 15.1293Z"></path>
+                </svg>
+            </button>
+            <a id="back-pickup-order" class="d-none" href="#order-popup-nav"></a>
             <p>Pickup</p>
+            <button title="Close (Esc)" type="button" class="mfp-close btn-close close-custom w-auto"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg></button>
         </div>
         <div class="infor-pickup-content">
             <h3>Select a Pickup Store</h3>
-
             <div class="row-infor-pickup">
                 <?php if (!$results) { ?>
                     <p>No stores available.</p>
@@ -188,16 +193,25 @@ function pickup_information_shortcode()
                             </svg>
                             <p class="locationstore"><? echo esc_html($store->location_store) ?></p>
                         </div>
-                        <p class="idstore"><? echo esc_html($store->id) ?></p>
+                        <?php
+                        $storeCurrentDateTime = new DateTime();
+                        $storeCurrentDateTime->modify('+1 day');
+                        $storeCurrentDateTime = $storeCurrentDateTime->format('j M Y');
+                        $start_time = $store->start_time;
+                        $formatted_start_time = date('h:i A', strtotime($start_time));
+                        $next_time = date('H:i A', strtotime('+1 hour', strtotime($start_time)));
+                        ?>
                         <div class="time-infor-items">
                             <h4>Earliest Collection Time</h4>
-                            <p>Tomorrow, 28 Jun 2024 (11:30 AM - 12:30 PM)</p>
+                            <p>Tomorrow, <?php echo esc_html($storeCurrentDateTime); ?> (<?php echo $formatted_start_time . ' - ' . $next_time; ?>)</p>
+
                         </div>
                     </div>
                 <?php } ?>
             </div>
         </div>
         <div class="action-pickup">
+            <div id="notification" style="display:none; color:red; text-align:center;padding:5px;"></div>
             <button class="button-selected-store">Continue with Selection</button>
             <a class="d-none" id="calendar-pickup" href="#calendar-pickup"></a>
         </div>
@@ -215,9 +229,18 @@ function custom_pickup_calendar_shortcode()
 ?>
 
     <div class="infor-pickup">
-        <div class="infor-pickup-title">
+        <div class="infor-pickup-title d-flex align-items-center justify-content-between">
+            <button class="btn-back-pickup-store">
+                <svg width="18px" height="18px" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 34 26" fill="none">
+                    <path fill="#5f3327" fill-rule="evenodd" clip-rule="evenodd" d="M31.6103 15.1293L7.60885 15.1293L14.6693 22.1897C15.4584 22.9788 15.4584 24.26 14.6693 25.0492C13.8787 25.8383 12.5989 25.8383 11.8098 25.0492L1.29695 14.5377C0.507788 13.7472 0.507788 12.4674 1.29695 11.6769L11.8098 1.16543C12.5989 0.37487 13.8787 0.37487 14.6693 1.16543C15.4584 1.9546 15.4584 3.23576 14.6693 4.02492L7.60885 11.0853L31.6103 11.0853C32.7275 11.0853 33.633 11.9908 33.633 13.1066C33.633 14.2238 32.7275 15.1293 31.6103 15.1293Z"></path>
+                </svg>
+            </button>
+            <a id="back-store" class="d-none" href="#confirmorder"></a>
             <p>Pickup</p>
-            <button title="Close (Esc)" type="button" class="mfp-close close-custom">x</button>
+            <button title="Close (Esc)" type="button" class="mfp-close  btn-close close-custom w-auto"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg></button>
         </div>
         <div class="infor-pickup-content">
             <div id="pickup-info-container"></div>
@@ -225,7 +248,7 @@ function custom_pickup_calendar_shortcode()
             <?php echo do_shortcode('[pickup_date_calander]'); ?>
             <?php echo do_shortcode('[pickup_time_calander]'); ?>
             <div id="pickup-date_time" class="action-pickup">
-                <button>Continue with Selection</button>
+                <button>Next</button>
             </div>
         </div>
     <?php
