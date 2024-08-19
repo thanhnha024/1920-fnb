@@ -2,6 +2,12 @@ name: Wordpress Notifications Git Action
 
 run-name: FCS Wordpress GitHub Actions 🚀
 
+permissions:
+  contents: write
+  pull-requests: write
+  issues: read
+  packages: none
+
 on:
   push:
     branches:
@@ -23,9 +29,7 @@ jobs:
           commit-message: upadte new change on ${{ github.ref }}
           title: New update adjustment by ${{ github.actor }}
           author: ${{ github.actor }} <${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com>
-          body: |
-            Update new changes💬:
-            - Update new change on  ${{ github.ref }}
+          body-path: './.github/pull_request_template.md'
           branch: ${{ github.ref }}
           base: master
           reviewers: ThanhNha

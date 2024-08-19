@@ -1,6 +1,4 @@
-### Details
-
-- Please write something:
+# Update new changes💬:
 
 ### Checklist
 
