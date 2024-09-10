@@ -61,7 +61,7 @@ function get_the_next_day($number, $currentDatePrams = '')
   $date_time = array(
     'date' => $nextDayDate,
     'day' => $nextDayDay,
-    'month' => $nextDayMonth,
+    'month' => substr($nextDayMonth, 0, 3),
     'fomated_date' => $fomatedDate,
     'short_date' => $shortDate
 
