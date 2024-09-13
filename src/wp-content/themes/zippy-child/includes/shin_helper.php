@@ -54,7 +54,7 @@ function get_the_next_day($number, $currentDatePrams = '')
   $date_time = array();
   // Format the next day's date, month, and day
   $nextDayDate = date('d', $nextDayTimestamp);
-  $nextDayMonth = date('F', $nextDayTimestamp);
+  $nextDayMonth = date('M', $nextDayTimestamp);
   $nextDayDay = date('D', $nextDayTimestamp);
   $shortDate = date('Y-m-d', $nextDayTimestamp);
 

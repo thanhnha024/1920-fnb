@@ -128,7 +128,7 @@ function display_button_select_method()
 		if (!WC()->session->get('pickupstatus') && !WC()->session->get('selected_store_id')) {
 			echo '<button class="btn select-dinning-preferences"><span class="fs-16px text-secondary">Select your dinning preference</span></button>';
 		} else {
-			echo '<a class="select-dinning-preferences" href="/cart/">Select your dinning preference</a>';
+			echo '<a class="select-dinning-preferences" href="/cart/">Proceed To Shopping Cart</a>';
 		}
 	}
 }
