@@ -1,13 +1,25 @@
-version: "3.9"
+version: "4.0"
 services:
   wordpress:
     container_name: ${PROJECT_ID}
     image: wordpress:6.3
+    user: www-data
     volumes:
+      # Mount volumes themes and plugin
       - ./src/.htaccess:/var/www/html/.htaccess
-      - ./src/wp-content/themes:/var/www/html/wp-content/themes
+      - ./src/wp-content/themes/:/var/www/html/wp-content/themes
+      - ./src/wp-content/themes/index.php:/var/www/html/wp-content/themes/index.php
+      - ./src/wp-content/themes/index.php:/var/www/html/wp-content/plugins/index.php
       - ./src/wp-content/plugins:/var/www/html/wp-content/plugins
       - ./src/wp-content/uploads:/var/www/html/wp-content/uploads
+      # Exclude themes default
+      - /var/www/html/wp-content/themes/twentytwentyone/
+      - /var/www/html/wp-content/themes/twentytwentytwo/
+      - /var/www/html/wp-content/themes/twentytwentythree/
+      - /var/www/html/wp-content/themes/twentytwentyfour/
+      # Exclude plugins default
+      - /var/www/html/wp-content/plugins/akismet
+      - /var/www/html/wp-content/plugins/hello.php
 
     environment:
       WORDPRESS_DB_HOST: ${WORDPRESS_DB_HOST}
@@ -16,11 +28,15 @@ services:
       WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}
       WORDPRESS_TABLE_PREFIX: ${WORDPRESS_TABLE_PREFIX}
       WORDPRESS_CONFIG_EXTRA: ${WORDPRESS_CONFIG_EXTRA}
+      APACHE_RUN_USER: www-data
+      APACHE_RUN_GROUP: www-data
+
     ports:
       - ${PORT}:80
     networks:
       - webnet
-    # restart: always
+
+    restart: unless-stopped
 
 networks:
   webnet:
