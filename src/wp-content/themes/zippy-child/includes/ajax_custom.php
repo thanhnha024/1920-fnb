@@ -146,17 +146,7 @@ function enqueue_woocommerce_scripts()
 }
 add_action('wp_enqueue_scripts', 'enqueue_woocommerce_scripts');
 
-function my_enqueue_scripts()
-{
 
-    wp_enqueue_script('mini-cart-js', get_template_directory_uri() . '/js/mini-cart.js', array('jquery'), '1.0', true);
-
-    wp_localize_script('mini-cart-js', 'mini_cart_params', array(
-        'ajax_url' => admin_url('admin-ajax.php'),
-        'update_cart_nonce' => wp_create_nonce('woocommerce-cart'),
-    ));
-}
-add_action('wp_enqueue_scripts', 'my_enqueue_scripts');
 
 
 function woocommerce_update_cart_item_quantity()
