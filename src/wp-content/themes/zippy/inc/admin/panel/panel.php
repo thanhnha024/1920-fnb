@@ -59,7 +59,7 @@ class Flatsome_Admin {
 	 * @since 1.0.0
 	 */
 	public function flatsome_panel_register_menu() {
-		add_menu_page( 'Welcome to Shin', 'Shin', 'manage_options', 'flatsome-panel', array( $this, 'flatsome_panel_welcome' ), get_template_directory_uri() . '/assets/img/logo-icon.svg', '2' );
+		add_menu_page( 'Welcome to Zippy', 'Zippy', 'manage_options', 'flatsome-panel', array( $this, 'flatsome_panel_welcome' ), get_template_directory_uri() . '/assets/img/logo-icon.svg', '2' );
 		add_submenu_page( 'flatsome-panel', 'Theme Registration', 'Theme Registration', 'manage_options', 'admin.php?page=flatsome-panel' );
 		add_submenu_page( 'flatsome-panel', 'Help & Guides', 'Help & Guides', 'manage_options', 'flatsome-panel-support', array( $this, 'flatsome_panel_support' ) );
 		add_submenu_page( 'flatsome-panel', 'Status', 'Status', 'manage_options', 'flatsome-panel-status', array( $this, 'flatsome_panel_status' ) );

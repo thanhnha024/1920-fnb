@@ -1,0 +1,327 @@
+@import "variables";
+@import "component";
+
+@import "animation";
+@import "buttons";
+@import "additional";
+@import "pickup_popup.scss";
+
+#nav-order a {
+  text-transform: capitalize;
+  font-size: 18px;
+}
+#nav-order {
+  margin-right: 0px !important;
+  padding-right: 0px !important;
+}
+.button-custom-popup {
+  color: #5f3327;
+  background-color: #ffb25b;
+}
+.select-dinning-preferences {
+  color: rgb(95, 51, 39);
+  background-color: rgb(255, 178, 91);
+  border-radius: 0px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px;
+  border: none;
+  padding: 15px;
+  text-align: center;
+  width: 100%;
+  display: block;
+}
+.woocommerce-mini-cart__buttons.buttons {
+  margin-top: 15px;
+}
+.close-custom {
+  position: relative !important;
+  font-size: 15px;
+  width: 100%;
+  font-weight: bolder;
+}
+.mfp-close.close-custom {
+  top: 0 !important;
+}
+.infor-pickup-title {
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 8px;
+  padding: 15px 0;
+}
+.infor-pickup-title p {
+  text-align: center;
+  margin-bottom: 0px;
+  color: rgb(95, 51, 39);
+  font-weight: 700;
+  font-size: 20px;
+}
+.infor-pickup-content {
+  padding: 20px;
+}
+.infor-pickup-content h3 {
+  color: rgb(95, 51, 39);
+  font-weight: 700;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+.row-infor-pickup {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.row-infor-pickup p {
+  margin-bottom: 0;
+  color: rgb(95, 51, 39);
+  font-weight: bolder;
+}
+.items-infor-pickup-content {
+  padding: 10px 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 8px;
+}
+.items-infor-pickup-content.active {
+  border: 1px solid rgb(255, 178, 91);
+}
+.row-items-infor {
+  display: flex;
+  align-items: center;
+  margin: 5px 0;
+}
+.items-infor-pickup-content.active p {
+  color: rgb(95, 51, 39);
+}
+.row-items-infor p {
+  margin-bottom: 0px;
+  margin-left: 5px;
+}
+.time-infor-items {
+  background-color: rgb(215, 233, 255);
+  color: rgb(12, 98, 202);
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 7px;
+}
+.time-infor-items h4 {
+  margin-bottom: 0px;
+  color: rgb(12, 98, 202);
+  font-size: 16px;
+}
+.time-infor-items p {
+  margin-bottom: 0px;
+  font-size: 16px;
+}
+.action-pickup {
+  padding: 10px 20px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 8px;
+}
+.action-pickup button {
+  margin: 0px;
+  width: 100%;
+  color: rgb(95, 51, 39);
+  background-color: rgb(255, 178, 91);
+  text-transform: capitalize;
+}
+.linkmap {
+  display: none;
+}
+.col-infor-store {
+  height: 510px;
+  overflow-y: auto;
+}
+.idstore {
+  display: none;
+}
+.pickup_location_field,
+.pickup_time_field {
+  margin-bottom: 10px;
+  h4 {
+    font-size: 85%;
+    letter-spacing: 0;
+    text-transform: inherit;
+  }
+  p {
+    margin-bottom: 0px;
+    font-size: 85%;
+    letter-spacing: 0;
+    text-transform: inherit;
+  }
+}
+
+.table-store-pickup {
+  td,
+  th {
+    border-bottom: 0;
+    color: #5f3327;
+    font-size: 13px;
+  }
+}
+.woocommerce-checkout {
+  .woocommerce-pickup-location {
+    display: none;
+  }
+}
+.pickup.edit-store-info {
+  padding: 20px;
+  margin: 0;
+}
+.edit-info-store-and-date-time {
+  padding: 20px;
+  .content-edit-info {
+    width: 90%;
+    padding-right: 90px;
+  }
+  .btn-edit-info-mini-cart {
+    width: 10%;
+  }
+  .store {
+    padding-bottom: 15px;
+  }
+  p {
+    color: #5f3327;
+  }
+}
+
+.woocommerce-order-details {
+  tr.shipping {
+    display: none;
+  }
+}
+.mfp-content.off-canvas-cart {
+  width: 430px !important;
+
+  .product-quantity {
+    .quantity {
+      margin: 0;
+      .minus,
+      .plus {
+        width: 30px;
+        height: 30px;
+        // padding: 15px;
+        border: 1px solid #ffb25b;
+      }
+    }
+  }
+}
+.woocommerce-mini-cart.product_list_widget {
+  padding: 10px 20px;
+}
+a.remove {
+  border: 0 !important;
+  border-radius: 0 !important;
+  height: 40px !important;
+  .icon-trash {
+    height: auto;
+  }
+}
+
+.section-clear-all {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 20px;
+  .btn-clear-all {
+    background-color: transparent;
+    border: 0;
+    width: 100px !important;
+    padding: 0;
+    margin-top: 0 !important;
+    span {
+      font-size: 14px;
+      color: #5f3327;
+      font-weight: 500;
+      text-decoration: underline;
+      text-transform: capitalize;
+      &:hover {
+        color: #5f3327;
+        font-weight: 600;
+      }
+    }
+    &:hover {
+      background-color: transparent;
+      border: 0;
+      box-shadow: none !important;
+    }
+  }
+  form,
+  h4 {
+    margin-bottom: 0 !important;
+  }
+}
+.mfp-close {
+  color: #5f3327 !important;
+  mix-blend-mode: inherit !important;
+  opacity: 1 !important;
+}
+.scroll-menu-order.sticky {
+  left: auto;
+}
+.cart-popup-title {
+  border-bottom: 1px solid #ccc;
+  padding: 15px 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+.product-info {
+  margin-left: 30px;
+}
+.product-thumbnail {
+  img {
+    width: 80px !important;
+    height: 80px !important;
+    border-radius: 5px;
+  }
+}
+.quantity.mini-cart {
+  .minus.button,
+  .plus.button {
+    margin: 0 !important;
+    width: 50px;
+    border: 2px solid #ffb25b;
+    border-right: 2px solid #ffb25b !important;
+    border-left: 2px solid #ffb25b !important;
+    border-radius: 5px !important;
+    font-size: 20px;
+    color: #ffb25b;
+    &:hover {
+      background-color: transparent !important;
+      box-shadow: none;
+    }
+  }
+  .input-text.qty {
+    max-width: 60px !important;
+    width: 100%;
+    height: 50px;
+    font-size: 16px;
+  }
+}
+#pickup-info-container {
+  .edit-store-info {
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 8px;
+  }
+}
+.edit-store-btn {
+  margin-bottom: 0;
+  margin-right: 0;
+}
+.btn-back-pickup-store,
+.btn-back-pickup-order {
+  margin-bottom: 0;
+  margin-right: 0;
+}
+.infor-pickup-title {
+  .close-custom {
+    padding: 0 15px;
+  }
+}
+
+.widget_shopping_cart_content {
+  .woocommerce-mini-cart__buttons {
+    display: none;
+  }
+}
+.btn.select-dinning-preferences {
+  line-height: normal;
+  span {
+    text-transform: capitalize;
+    font-weight: 400;
+  }
+}

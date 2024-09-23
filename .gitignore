@@ -12,7 +12,7 @@ src/wp-content/*
 # wp-content/uploads
 !src/wp-content/themes
 
-!src/wp-content/plugins
+# !src/wp-content/plugins
 
 !src/wp-content/.htaccess
 

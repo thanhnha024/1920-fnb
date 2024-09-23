@@ -3,27 +3,33 @@ name: FCS Wordpress Deploy Via SFTP
 run-name: FCS Wordpress Deploy To Server 🚀
 on:
   push:
-    branches:
-      - production
-      - master
+    tags:
+      - production-*
 
 jobs:
   send_deploying:
-    name: send telegram message when Deploying
+    name: Send Telegram Message When Deploying
     runs-on: ubuntu-latest
+    env:
+      super_secret: ${{ secrets.FPT_DIR_PATH }}
     steps:
-      - name: send telegram message when Deploying
+      - name: Check if FPT_DIR_PATH is set
+        if: ${{ env.super_secret != '' }}
+        id: check_secret
+        run: echo "FPT_DIR_PATH=${{ secrets.FPT_DIR_PATH }}"
+
+      - name: Send Telegram Message When Deploying
         uses: appleboy/telegram-action@master
         with:
           to: -1002034905977
           token: 6611988217:AAERCNw3lNbdpABmMztQudQXBuPcp1jsKdk
           format: html
           message: |
-            <i><code>${{secrets.FPT_DIR_PATH}}</code><b> Website Deploying... 🚀</b></i>
+            <i><code>${{ secrets.FPT_DIR_PATH }}</code><b> Website Deploying... 🚀</b></i>
 
             <b>Details:</b>
             Project name 💻: ${{ github.repository }}
-            Project link 🔎:  https:/${{secrets.FPT_DIR_PATH}}
+            Project link 🔎: https://${{ secrets.FPT_DIR_PATH }}
 
   web-deploy-via-sfpt:
     name: 🚀 Deploy Website To Production
@@ -54,6 +60,11 @@ jobs:
           password: ${{secrets.FTP_PASSWORD}}
           local-dir: ./src/
           server-dir: /${{secrets.FPT_DIR_PATH}}/
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            **/wp-content/plugins/**
 
   notification-to-telegram:
     runs-on: ubuntu-latest
@@ -70,11 +81,9 @@ jobs:
           token: 6611988217:AAERCNw3lNbdpABmMztQudQXBuPcp1jsKdk
           format: html
           message: |
-            <i><code>${{secrets.FPT_DIR_PATH}}</code><b>Website Deployed ✅</b></i>
+            <i><code>${{secrets.FPT_DIR_PATH}}</code><b> Website Deployed ✅</b></i>
 
             <b>Details:</b>
             Project name 💻: ${{ github.repository }}
             Project link 🔎: https://github.com/${{ github.repository }}
-            See new changes: https:/${{secrets.FPT_DIR_PATH}}
-
-
+            See new changes: https://${{secrets.FPT_DIR_PATH}}

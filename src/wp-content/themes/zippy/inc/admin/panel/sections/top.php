@@ -6,10 +6,10 @@
 <?php add_thickbox(); ?>
 <?php $flatsome_ver = wp_get_theme( get_template() );  ?>
 <h1>
-    <?php echo '<strong>Welcome to Shin</strong>'; ?>
+    <?php echo '<strong>Welcome to Zippy</strong>'; ?>
 </h1>
 <div class="about-text">
-<?php _e( 'Thanks for Choosing Shin - The worlds most powerful WooCommerce and Multi-Purpose Theme. This page will help you quickly get up and running with Flatsome.', 'flatsome-admin' ); ?>
+<?php _e( 'Thanks for Choosing Zippy - The worlds most powerful WooCommerce and Multi-Purpose Theme. This page will help you quickly get up and running with Flatsome.', 'flatsome-admin' ); ?>
     <br><br>
     <a href="<?php echo admin_url().'admin.php?page=flatsome-setup'; ?>" class="button button-primary button-large"><?php _e('Setup Wizard', 'flatsome-admin' ); ?></a>
 </div>
