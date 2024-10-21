@@ -1,4 +1,4 @@
-version: "4.0"
+version: "3.8"
 services:
   wordpress:
     container_name: ${PROJECT_ID}
@@ -17,9 +17,9 @@ services:
       - /var/www/html/wp-content/themes/twentytwentytwo/
       - /var/www/html/wp-content/themes/twentytwentythree/
       - /var/www/html/wp-content/themes/twentytwentyfour/
-      # Exclude plugins default
-      - /var/www/html/wp-content/plugins/akismet
-      - /var/www/html/wp-content/plugins/hello.php
+      # # Exclude plugins default
+      # - /var/www/html/wp-content/plugins/akismet
+      # - /var/www/html/wp-content/plugins/hello.php
 
     environment:
       WORDPRESS_DB_HOST: ${WORDPRESS_DB_HOST}
@@ -40,5 +40,6 @@ services:
 
 networks:
   webnet:
+    external: true
     name: webnet
     driver: bridge
