@@ -17,7 +17,7 @@ services:
       - /var/www/html/wp-content/themes/twentytwentytwo/
       - /var/www/html/wp-content/themes/twentytwentythree/
       - /var/www/html/wp-content/themes/twentytwentyfour/
-      # # Exclude plugins default
+      # Exclude plugins default
       - /var/www/html/wp-content/plugins/akismet
       - /var/www/html/wp-content/plugins/hello.php
 
