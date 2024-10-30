@@ -60,7 +60,6 @@ jobs:
           password: ${{secrets.FTP_PASSWORD}}
           local-dir: ./src/
           server-dir: /${{secrets.FPT_DIR_PATH}}/
-          state-name: state/.sync-state.json
           exclude: |
             **/.git*
             **/.git*/**
