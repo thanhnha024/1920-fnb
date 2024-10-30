@@ -80,14 +80,14 @@ function display_pickup_time_and_date_in_admin_order($order)
     }
 }
 
-add_filter('woocommerce_checkout_fields', 'custom_remove_woo_checkout_fields');
+// add_filter('woocommerce_checkout_fields', 'custom_remove_woo_checkout_fields');
 function custom_remove_woo_checkout_fields($fields)
 {
     unset($fields['billing']['billing_company']);
     unset($fields['billing']['billing_address_2']);
     unset($fields['billing']['billing_address_1']);
     unset($fields['billing']['billing_city']);
-    unset($fields['billing']['billing_postcode']);
+    // unset($fields['billing']['billing_postcode']);
     unset($fields['billing']['billing_country']);
     unset($fields['billing']['billing_state']);
 
