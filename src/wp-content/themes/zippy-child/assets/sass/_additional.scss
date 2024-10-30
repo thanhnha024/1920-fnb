@@ -224,7 +224,7 @@ html {
 }
 #order-popup-nav p {
   font-size: 14px;
-  padding: 0 40px;
+  padding: 0 20px;
 }
 #order-popup-nav .col-pop-up .col-inner {
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -339,5 +339,30 @@ html {
   }
   .action-popup-order .single_add_to_cart_button.button.alt {
     width: 100%;
+  }
+}
+
+.infor-pickup-content{
+  .infor-pickup-content{
+    padding: 20px 0;
+    h3{
+      width: 50%;
+    }
+    #calendar-control-button{
+      width: 50%;
+      margin-right: 0px;
+      padding-right: 0px;
+    }
+    .wrapper{
+      align-items: center;
+    }
+  }
+  #calendar-control-week{
+    overflow-x: auto;
+  }
+  .pickup-time{
+    h3{
+      width: 100%;
+    }
   }
 }
